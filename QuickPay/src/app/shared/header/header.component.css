@@ -1,0 +1,31 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Evita el scroll */
+}
+.header {
+    width: 100vw;
+    height: 6vh; /* Aproximadamente 60px, manteniéndose proporcional al tamaño de la fuente raíz */
+    background: linear-gradient(to right, #e2da98, #5af09b);
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0.65vh 1.6vh rgba(0, 0, 0, 0.5); /* Equivalente a 2px y 5px */
+    position: fixed; /* Fijo en la parte superior */
+    top: 0;
+    z-index: 2;
+    left: 0; /* Asegura que empieza desde el borde izquierdo */
+    margin: 0;
+    padding: 0;
+}
+
+.logo-img {
+    position: absolute;
+    top: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 12vw; /* Más grande */
+    height: auto;
+    z-index: 2;
+}
