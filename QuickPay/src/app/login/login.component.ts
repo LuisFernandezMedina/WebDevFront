@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
 
@@ -8,7 +9,7 @@ import { HeaderComponent } from '../shared/header/header.component';
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  imports: [FooterComponent, HeaderComponent]
+  imports: [FooterComponent, HeaderComponent, RouterModule]
 
 })
 export class LoginComponent {
