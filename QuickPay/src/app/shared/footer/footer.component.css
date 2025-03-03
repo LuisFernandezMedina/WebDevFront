@@ -1,15 +1,16 @@
 
 .footer {
     width: 100%;
+    height: 3vh;
     position: fixed;
     bottom: 0;
     left: 0;
-    background-color: rgba(28, 28, 28, 0.95);
+    background-color: #07313f;
     padding: 1.1vh 2.2vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     box-shadow: 0 -0.22vh 0.55vh rgba(0, 0, 0, 0.5);
     z-index: 10;
     font-family: "Poppins", sans-serif; /* Fuente más moderna */
@@ -31,7 +32,7 @@
 }
 
 .footer-links li a {
-    color: #b3b3b3;
+    color: #f0ecec;
     text-decoration: none;
     font-size: 1.54vh;
     font-weight: 500;
@@ -44,7 +45,7 @@
 
 .footer-info {
     font-size: 1.32vh;
-    color: #b3b3b3;
+    color: #f0ecec;
     text-align: right;
     margin-left: auto;
     margin-right: 5vh; /* Agrega margen a la derecha */

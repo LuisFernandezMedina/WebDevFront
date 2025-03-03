@@ -12,7 +12,7 @@ html, body {
     justify-content: center;
     align-items: center;
     background: 
-    url('/assets/images/backgif.gif') no-repeat center center;
+    url('/assets/images/background2.jpg') no-repeat center center;
     background-size: cover;
     padding: 1.25rem;
     overflow-y: auto;
@@ -80,10 +80,11 @@ html, body {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #23252b;
+    background-color: #106a89;
     box-shadow: 0 0.9375rem 1.5625rem rgba(0, 0, 0, 0.5);
     text-align: center;
     margin-bottom: 1.25rem;
+    border-radius: 0.3125rem;
 }
 
 .login-box h2 {
@@ -223,7 +224,7 @@ html, body {
 }
 
 .actions .register-text .register-link {
-    color: #6d29ff;
+    color: #29d8ff;
     font-weight: bold;
     text-decoration: none;
     font-size: 0.9375rem;
