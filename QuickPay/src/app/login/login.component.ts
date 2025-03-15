@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
-
 
 @Component({
   selector: 'app-login',
@@ -46,13 +45,12 @@ export class LoginComponent {
     'tempmailaddress.com'
   ];
   
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
   ngOnInit(): void {
   }
 
    // Método de inicio de sesión que llama al servicio `UserService`
   loginAttempt(): void {
-    alert('Login attempt');
     this.resetValidationStates();
     this.onEmailChange();
     this.validatePassword();
@@ -65,11 +63,25 @@ export class LoginComponent {
       alert('User: ' + user.email + ' Password: ' + user.pwd);
       this.userService.loginUser({ email: this.username, password: this.password }).subscribe({
         next: (response) => {
-          console.log("Login exitoso:", response);
-          this.isLoading = false;
-          this.loginFailed = false;
-          alert('Login exitoso');
-        },
+          
+                
+                // Extraer el token del response (ajusta según la estructura de la API)
+                const token = response.token || response.accessToken || response.authToken;
+                
+                if (token) {
+                    console.log("Token recibido:", token);                  
+                    // Guardar el token en sessionStorage
+                    sessionStorage.setItem('authToken', token);                    
+                    this.isLoading = false;
+                    this.loginFailed = false;
+                    alert('Login exitoso');
+                    
+                    this.router.navigate(['/ventana-principal']);
+                } else {
+                    console.warn("No se recibió un token en la respuesta.");
+                    alert("Error: No se recibió un token.");
+                }
+            },
         error: (error) => {
           console.error("Error en login:", error);
           this.isLoading = false;
