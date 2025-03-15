@@ -2,35 +2,24 @@
 
 <div class="register-container">
     <div class="register-box">
-        <h2>Creación de Cuenta</h2>
+        <h2>Regístrate en Quickpay</h2>
         <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="form-column">
                     <!-- Nombre -->
                     <div class="textbox">
-                        <input type="text" id="nombre" placeholder="Nombre" [(ngModel)]="nombre" name="nombre" required (keydown.enter)="focusNext('apellido')"/>
-                        <label for="nombre">Nombre*</label>
+                        <input type="text" id="nombre" placeholder="Nombre y Apellidos" [(ngModel)]="nombre" name="nombre" required (keydown.enter)="focusNext('apellido')"/>
+                        <label for="nombre">Nombre y Apellidos*</label>
                     </div>
-                <div class="form-grid">
-                    <!-- Apellido -->
-                    <div class="textbox">
-                        <input type="text" id="apellido" placeholder="Apellido" [(ngModel)]="apellido" name="apellido" required (keydown.enter)="focusNext('apellido2')"/>
-                        <label for="apellido">Primer Apellido*</label>
-                    </div>
-                    <!-- Apellido2 -->
-                    <div class="textbox">
-                        <input type="text" id="apellido2" placeholder="Apellido2" [(ngModel)]="apellido2" name="apellido2" required (keydown.enter)="focusNext('email')"/>
-                        <label for="apellido2">Segundo Apellido*</label>
-                    </div>
-                </div>
+                
                     <!-- Correo Electrónico -->
                     <div class="textbox">
-                        <input 
-                            type="email" 
-                            id="email" 
-                            placeholder="Correo Electrónico" 
-                            [(ngModel)]="email" 
-                            name="email" 
-                            required 
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Correo Electrónico"
+                            [(ngModel)]="email"
+                            name="email"
+                            required
                             (blur)="validateEmail()"
                             (keydown.enter)="focusNext('centro')"/>
                         <label for="email">Correo Electrónico*</label>
@@ -40,37 +29,7 @@
                             <small>El correo electrónico no tiene un formato válido.</small>
                         </div>
                     </div>
-                <div class="form-grid">
-                    <!-- Centro -->
-                    <div class="textbox">
-                        <input type="text" id="centro" placeholder="Centro" [(ngModel)]="centro" name="centro" required (keydown.enter)="focusNext('departamento')"/>
-                        <label for="centro">Centro*</label>
-                    </div>
-                    <!-- Departamento -->
-                    <div class="textbox">
-                        <input type="text" id="departamento" placeholder="Departamento" [(ngModel)]="departamento" name="departamento" required (keydown.enter)="focusNext('perfil')" />
-                        <label for="departamento">Departamento</label>
-                    </div>
-                </div>
-                <div class="form-grid">
-                    <!-- Fecha de alta en la compañía -->
-                    <div class="textbox">
-                        <input 
-                            type="date" 
-                            id="fechalta" 
-                            placeholder="Fecha de Alta" 
-                            [(ngModel)]="fechaAlta" 
-                            name="fechalta" 
-                            required 
-                            (blur)="validateFechaAlta()"/>
-                        <label for="fechalta">Fecha de Alta*</label>
-                    </div>
-                    <!-- Perfil laboral -->
-                    <div class="textbox">
-                        <input type="text" id="perfil" placeholder="Perfil Laboral (posición)" [(ngModel)]="perfilLaboral" name="perfilLaboral" required (keydown.enter)="focusNext('password1')"/>
-                        <label for="perfil">Perfil Laboral</label>
-                    </div>
-                </div>
+                
                 <div class="form-grid">
                     <div class="error-container">
                         <div *ngIf="fechaInvalid" class="error-message">
@@ -94,15 +53,14 @@
                     </div>
                 </div>
                 
-                <div class="form-grid">
                     <div class="error-message" *ngIf="passwordError">{{ passwordError }}</div>
                     <div class="error-message" *ngIf="confirmPasswordError">{{ confirmPasswordError }}</div>
-                </div>
+                
 
                 <p class="required-info">Los campos(*) son obligatorios.</p>
             </div>
             <div class="actions">
-                <button class="btn" (click)="registerForm.ngSubmit.emit()">Acceder</button>
+                <button class="btn" type="submit">Acceder</button>
                 <p class="login-text">
                     ¿Ya tienes una cuenta? <a routerLink="/login" class="login-link" (click)="navigateTo('/login')">INICIAR SESIÓN</a>
                 </p>

@@ -40,11 +40,12 @@
     justify-content: center;
 }
 .error-message {
-    color: #ff4d4f;
+    color: #f37e80;
     font-size: 1em;
     margin-top: -3%;
     text-align: left;
     font-weight: 500;
+    padding: 2%;
 }
 
 .error-message small {

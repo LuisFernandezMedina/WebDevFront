@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
 
@@ -20,13 +21,7 @@ const PASSWORD_ERROR_MESSAGE =
 export class RegistroComponent {
 
   nombre: string = '';
-  apellido: string = '';
-  apellido2: string = '';
   email: string = '';
-  departamento: string = '';
-  centro: string = '';
-  fechaAlta: string = '';
-  perfilLaboral: string = '';
   password1: string = '';
   password2: string = '';
   passwordError: string = '';
@@ -42,18 +37,10 @@ export class RegistroComponent {
   formattedDate: string = '';
 
   constructor(
-    private readonly router: Router,
+    private readonly router: Router, private userService: UserService
   ) {}
 
-  // Validación de la fecha de alta debe ser menor o igual a la fecha actual
-  validateFechaAlta(): void {
-    this.fechaInvalid = false;
-    const alta = new Date(this.fechaAlta);
-    const fechaActual = new Date();
-    if (alta > fechaActual) {
-      this.fechaInvalid = true;
-    }
-  }
+
 
   // Validación de formato de correo electrónico
   validateEmail(): void {
@@ -100,11 +87,6 @@ export class RegistroComponent {
     if (this.emailInvalid) {
       alert("Correo electrónico inválido");
       return;
-    } 
-
-    if (this.fechaInvalid) {
-      alert("Fecha de alta inválida");
-      return;
     }
 
     // El primero comprueba el formato de la contraseña y 
@@ -118,15 +100,39 @@ export class RegistroComponent {
     }
     
     // Validar si los campos obligatorios están vacíos
-    if (!this.nombre || !this.apellido || !this.apellido2 || !this.email || !this.centro || !this.fechaAlta || !this.password1 || !this.password2) {
+    if (!this.nombre || !this.email ||!this.password1 || !this.password2) {
       this.errorMessage = 'Todos los campos obligatorios deben estar llenos.';
-      return; 
+      return;
     }
-    // const hashedPassword = this.password1; // Aquí sería el cifrado real.
-
-    let formattedDate = this.fechaAlta ? this.fechaAlta.toString().split('T')[0] : '';
-
+    const userData = {
+      name: this.nombre,
+      email: this.email,
+      password: this.password1,
   
+    };
+
+    console.log("Datos del usuario a registrar:", userData);
+    alert(`Datos introducidos:
+    - Nombre: ${userData.name}
+    - Email: ${userData.email}
+    - Contraseña: ${userData.password}`);
+
+    this.userService.registerUser(userData).subscribe({
+      next: (response) => {
+          console.log("Registro exitoso:", response);
+          this.isLoading = false;
+          alert("Registro exitoso");
+
+          // Redirigir al login después de registrar
+          this.router.navigate(['/login']);
+      },
+      error: (error) => {
+          console.error("Error en el registro:", error);
+          this.isLoading = false;
+          alert("Hubo un error. Intente en otro momento.");
+      }
+  });
+
   }
   
   // Método para redirigir a las diferentes páginas
