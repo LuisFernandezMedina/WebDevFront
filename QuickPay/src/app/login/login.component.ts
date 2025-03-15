@@ -1,15 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  imports: [FooterComponent, HeaderComponent, RouterModule]
+  imports: [FooterComponent, HeaderComponent, RouterModule, CommonModule, FormsModule]
 
 })
 export class LoginComponent {
@@ -47,6 +49,7 @@ export class LoginComponent {
 
    // Método de inicio de sesión que llama al servicio `UserService`
   loginAttempt(): void {
+    alert('Login attempt');
     this.resetValidationStates();
     this.onEmailChange();
     this.validatePassword();
@@ -56,6 +59,7 @@ export class LoginComponent {
         email: this.username,
         pwd: this.password,
       };
+      alert('User: ' + user.email + ' Password: ' + user.pwd);
   
     } else {
       this.loginFailed = true;
