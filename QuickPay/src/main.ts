@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -6,10 +6,12 @@ import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
+console.log("🔥 provideHttpClient se está ejecutando en main.ts");
+
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(FormsModule),
-    importProvidersFrom(HttpClientModule),
-    provideRouter(routes) // Asegura que las rutas están registradas
+    provideHttpClient(), // <-- Se asegura que HttpClient está disponible en el cliente
+    provideRouter(routes)
   ]
-}).catch(err => console.error(err));
+}).catch(err => console.error("❌ Error en main.ts:", err));

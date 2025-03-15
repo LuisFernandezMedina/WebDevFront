@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { UserService } from '../services/user.service';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
 
@@ -11,7 +12,8 @@ import { HeaderComponent } from '../shared/header/header.component';
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  imports: [FooterComponent, HeaderComponent, RouterModule, CommonModule, FormsModule]
+  imports: [FooterComponent, HeaderComponent, RouterModule, CommonModule, FormsModule],
+  providers: [UserService]
 
 })
 export class LoginComponent {
@@ -43,7 +45,8 @@ export class LoginComponent {
     'fakeinbox.com',
     'tempmailaddress.com'
   ];
-  constructor() { }
+  
+  constructor(private userService: UserService) { }
   ngOnInit(): void {
   }
 

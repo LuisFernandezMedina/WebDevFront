@@ -1,7 +1,23 @@
+import { provideHttpClient } from '@angular/common/http';
+import { importProvidersFrom } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
-import { config } from './app/app.config.server';
+import { routes } from './app/app.routes';
 
-const bootstrap = () => bootstrapApplication(AppComponent, config);
+console.log("🔥 provideHttpClient se está ejecutando en main.server.ts");
 
-export default bootstrap;
+// Exportamos una función que devuelve una promesa de bootstrapApplication()
+export default function bootstrap() {
+  return bootstrapApplication(AppComponent, {
+    providers: [
+      importProvidersFrom(FormsModule),
+      provideHttpClient(),
+      provideRouter(routes)
+    ]
+  }).catch(err => {
+    console.error("❌ Error en main.server.ts:", err);
+    throw err;
+  });
+}
