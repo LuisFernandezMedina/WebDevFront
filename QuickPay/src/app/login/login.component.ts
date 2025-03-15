@@ -63,7 +63,21 @@ export class LoginComponent {
         pwd: this.password,
       };
       alert('User: ' + user.email + ' Password: ' + user.pwd);
-  
+      this.userService.loginUser({ email: this.username, password: this.password }).subscribe({
+        next: (response) => {
+          console.log("Login exitoso:", response);
+          this.isLoading = false;
+          this.loginFailed = false;
+          alert('Login exitoso');
+        },
+        error: (error) => {
+          console.error("Error en login:", error);
+          this.isLoading = false;
+          this.loginFailed = true;
+          this.errorMessage = "Credenciales incorrectas. Inténtalo de nuevo.";
+        }
+      });
+
     } else {
       this.loginFailed = true;
     }

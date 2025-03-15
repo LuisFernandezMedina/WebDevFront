@@ -6,7 +6,6 @@ import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
-console.log("🔥 provideHttpClient se está ejecutando en main.server.ts");
 
 // Exportamos una función que devuelve una promesa de bootstrapApplication()
 export default function bootstrap() {
