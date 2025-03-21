@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div class="perfil-container">  
+    <div class="profile-info">
+        <h2>Perfil Empleado</h2>
+
+        <!-- Columna 1 -->
+        <div class="info-field">
+            <label>Nombre y Apellidos</label>
+            <p>{{ user.nombre }}</p>
+        </div>
+
+        <div class="info-field">
+            <label>Correo</label>
+            <p>{{ user.correo }}</p>
+        </div>
+        <div class="info-field">
+            <label>Balance Actual</label>
+            <p>{{ user.correo }}</p>
+        </div>
+
+
+        <div class="actions">
+        <button class="btn" (click)="editUser(this.user.correo)">Editar Perfil</button>
+        </div>
+    </div>
+
+    <!-- Botón para volver -->
+    <div class="back-button-container">
+        <button class="back-button" (click)="navigateTo('/ventana-principal')">Volver</button>
+    </div>
+
+    <app-footer></app-footer>
+</div>
