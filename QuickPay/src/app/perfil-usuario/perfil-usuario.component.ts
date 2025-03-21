@@ -18,13 +18,9 @@ import { HeaderComponent } from '../shared/header/header.component';
 export class PerfilUsuarioComponent implements OnInit {
 
   user = {
-    nombre: 'Nombre de usuario',
-    apellidos: 'Apellidos de usuario',
+    nombre: 'Nombre y apellidos de usuario',
     correo: 'user@correo.com',
-    depart: 'Departamento',
-    centroTrabajo: 'Centro de Trabajo',
-    alta: 'Fecha de alta',
-    perfil: 'Perfil'
+    balance: '9999.00'
   };
 
   profilePicture: string | ArrayBuffer | null = 'assets/UsuarioSinFoto.png';
