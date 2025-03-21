@@ -1,1 +1,48 @@
-<p>anadir-balance works!</p>
+<app-header></app-header>
+<div class="container">
+    <div class="balance-container">
+        <div class="form-container">
+            <h2>Añade Balance a tu cuenta</h2>
+            <form>
+                <div class="input-group">
+                    <label for="cardholder_name">Nombre de Titular</label>
+                    <input type="text" id="cardholder_name" [(ngModel)]="cardholder_name" name="cardholder_name" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="card_number">Nº Tarjeta</label>
+                    <input type="text" id="card_number" [(ngModel)]="card_number" name="card_number" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="expiration_date">Fecha</label>
+                    <input type="text" id="expiration_date" [(ngModel)]="expiration_date" name="expiration_date" required>
+                </div>
+                
+                <div class="input-group password-box">
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" [(ngModel)]="cvv" name="cvv" required>
+                    <span class="toggle-password" (click)="togglePasswordVisibility()">
+                        {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
+                    </span>
+                </div>
+                
+                <button class="btn" type="button" (click)="addBalance()">Realizar Pago</button>
+            </form>
+        </div>
+        
+        <div class="balance-info">
+            <h1>{{ user.balance }}</h1>
+            <p>Balance Activo</p>
+        </div>
+    </div>
+    
+    
+
+</div>
+<div class="back-button-container">
+    <button class="back-button" (click)="navigateTo('/ventana-principal')">Volver</button>
+</div>
+
+
+<app-footer></app-footer>
