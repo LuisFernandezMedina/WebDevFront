@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AnadirBalanceComponent } from './anadir-balance/anadir-balance.component';
 import { LoginComponent } from './login/login.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { RegistroComponent } from './registro/registro.component';
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'ventana-principal', component: VentanaPrincipalComponent },
-  { path: 'perfil-usuario', component: PerfilUsuarioComponent }
+  { path: 'perfil-usuario', component: PerfilUsuarioComponent },
+  { path: 'anadir-balance', component: AnadirBalanceComponent }
 
 ];

@@ -1,0 +1,635 @@
+
+.ventana-container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0%;
+    background: url('/assets/images/background2.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+/* Contenedor de la información del usuario en la esquina superior izquierda */
+.user-profile {
+    height: 6vh;      /* Igual que el header */
+    position: absolute;
+    top: 0; /* Equivalente a 5px */
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 0.88vh 1.32vh; /* Equivalente a 8px 12px */
+    border-radius: 0.88vh; /* Equivalente a 8px */
+    cursor: pointer;
+    background-color: transparent;
+    height: 5.49vh; /* Equivalente a 50px */
+    z-index: 9999;
+    transition: all 0.3s ease-in-out;
+    
+    
+    
+}
+.profile-picture {
+    width: 6.04vh; /* Equivalente a 55px */
+    height: 6.04vh; /* Equivalente a 55px */
+    border-radius: 50%;
+    margin-right: 1.1vh; /* Equivalente a 10px */
+    border: 0.22vh solid #f5f5f5; /* Equivalente a 2px */
+    transition: all 0.3s ease-in-out;
+}
+
+.user-fullname {
+    color: #ffffff;
+    font-size: 2.2vh; /* Equivalente a 20px */
+    font-weight: 600;
+    padding-right: 1.65vh; /* Equivalente a 15px */
+    position: relative;
+}
+
+.user-fullname::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 25%;
+    transform: translateY(-50%);
+    height: 6vh; /* Equivalente a 130% */
+    width: 0.22vh; /* Equivalente a 2px */
+    background-color: #ffffff;
+    opacity: 0.5;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.user-profile:hover .user-fullname::after {
+    background-color: #5fc67d;
+    opacity: 1;
+}
+
+.user-edit-button {
+    display: none;
+    background-color: #5fc67d;
+    color: white;
+    font-size: 1.76vh; /* Equivalente a 16px */
+    font-weight: 600;
+    padding: 0.88vh 1.76vh; /* Equivalente a 8px 16px */
+    border-radius: 0.88vh; /* Equivalente a 8px */
+    margin-left: 1.1vh; /* Equivalente a 10px */
+    transition: all 0.3s ease-in-out;
+}
+.user-profile:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding-right: 2.2vh; /* Equivalente a 20px */
+    transition: all 0.3s ease-in-out;
+}
+
+.user-profile:hover .user-edit-button {
+    display: inline-block;
+}
+
+.user-profile:hover .profile-picture, .user-profile:hover .user-fullname {
+    transform: translateX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Efecto hover sobre el botón "Editar perfil" */
+.user-edit-button:hover {
+    background-color: #45b06a;
+    transform: translateY(-0.11vh); /* Equivalente a -1px */
+    box-shadow: 0 0.66vh 0.88vh rgba(0, 0, 0, 0.4), 0 0.22vh 0.44vh rgba(255, 255, 255, 0.1) inset; /* Equivalente a 0 6px 8px y 0 2px 4px */
+    transition: all 0.3s ease-in-out;
+}
+
+.user-edit-button:active {
+    transform: translateY(0);
+    box-shadow: 0 0.44vh 0.66vh rgba(0, 0, 0, 0.3), 0 0.11vh 0.22vh rgba(255, 255, 255, 0.1) inset; /* Equivalente a 0 4px 6px y 0 1px 2px */
+}
+
+
+
+
+
+
+.Btn:hover {
+    width: 19.76vh; /* Equivalente a 180px */
+    border-radius: 4.39vh; /* Equivalente a 40px */
+    transition-duration: .3s;
+}
+
+/* Efecto de click en el botón */
+.Btn:active {
+    transform: translate(0.22vh, 0.22vh); /* Equivalente a 2px */
+}
+
+.admin-controls2 {
+    position: absolute;
+    top: 10%; /* Ajusta según lo alto que lo quieras */
+    right: 2.2vh;
+    z-index: 10;
+    display: flex;
+    flex-direction: column; /* Asegura que los botones van en vertical */
+    gap: 1vh; /* Espacio entre botones */
+    align-items: flex-end; /* Asegura que los botones se alinean a la derecha */
+}
+
+
+/* Ambos botones en la misma posición pero sin moverse entre sí */
+.logout-container, .add-balance-container {
+    position: absolute;
+    right: 0; /* Se mantiene pegado a la derecha */
+}
+
+/* Ajuste individual de cada botón */
+.logout-container {
+    top: 0;
+}
+
+.add-balance-container {
+    top: 7vh; /* Ajusta la distancia entre los botones */
+}
+
+/* Estilos del botón */
+.Btn2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 6.04vh; /* Tamaño inicial */
+    height: 6.04vh;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 0.22vh 0.22vh 1.1vh rgba(0, 0, 0, 0.199);
+    background-color: rgb(255, 65, 65);
+}
+
+
+.Btn2:hover {
+    width: 19.76vh; /* Equivalente a 180px */
+    border-radius: 4.39vh; /* Equivalente a 40px */
+    transition-duration: .3s;
+    
+}
+
+.Btn2:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 0;
+}
+  /* Efecto hover en el texto */
+.Btn2:hover .text {
+    opacity: 1;
+    font-size: 0.9em;
+    width: 70%; /* Equivalente a 70% del ancho total */
+    transition-duration: .3s;
+    padding-right: 1.1vh; /* Equivalente a 10px */
+}
+
+/* Efecto de click en el botón */
+.Btn2:active {
+    transform: translate(0.22vh, 0.22vh); /* Equivalente a 2px */
+}
+
+/* Signo más */
+.sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign svg {
+    width: 3.3vh; /* Equivalente a 30px */
+    height: 3.3vh; /* Equivalente a 30px */
+}
+
+.sign svg path {
+    fill: white;
+}
+  
+  /* Texto */
+  .text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 0.65em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+
+  .Btn3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 6.04vh; /* Tamaño inicial */
+    height: 6.04vh;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 0.22vh 0.22vh 1.1vh rgba(0, 0, 0, 0.199);
+    background: linear-gradient(to right, #106a89, #5af09b);
+}
+
+
+.Btn3:hover {
+    width: 19.76vh; /* Equivalente a 180px */
+    border-radius: 4.39vh; /* Equivalente a 40px */
+    transition-duration: .3s;
+    
+}
+
+.Btn3:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 0;
+}
+  /* Efecto hover en el texto */
+.Btn3:hover .text {
+    opacity: 1;
+    font-size: 0.9em;
+    width: 70%; /* Equivalente a 70% del ancho total */
+    transition-duration: .3s;
+    padding-right: 1.1vh; /* Equivalente a 10px */
+}
+
+/* Efecto de click en el botón */
+.Btn3:active {
+    transform: translate(0.22vh, 0.22vh); /* Equivalente a 2px */
+}
+
+/* Botón de volver */
+.back-button-container {
+    position: fixed;
+    bottom: 8%;
+    left: 2.2vh; /* Equivalente a 20px */
+}
+
+.back-button {
+    background-color: #007bff;
+    border: none;
+    padding: 1.1vh 2.2vh; /* Equivalente a 10px 20px */
+    border-radius: 0.55vh; /* Equivalente a 5px */
+    color: white;
+    font-size: 0.8em; /* Equivalente a 14px */
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    max-width: 120vw;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.modal-overlay h3 {
+    color: #f1f1f1;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-shadow: 0.11vh 0.11vh 0.33vh rgba(0, 0, 0, 0.5);
+    word-wrap: breaak-word;
+    white-space: pre-wrap;
+}
+
+.modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background-color: #2a2a2a !important;
+    padding: 2.75vh !important;
+    border-radius: 1.65vh !important;
+    z-index: 2147483647 !important;
+    box-shadow: 0 0.88vh 1.76vh rgba(0, 0, 0, 0.4);
+    display: block !important;
+    opacity: 1 !important;
+    text-align: center; 
+    color: #f1f1f1;
+}
+
+
+
+.calend-ausen-container h2 {
+    text-shadow: 0.051vw 0.051vw 0.26vw rgba(0, 0, 0, 0.5); /* 1px, 1px, 5px */
+    font-size: 1.7em;
+}
+
+.calend-ausen-container h3 {
+    color: #f1f1f1; /* Equivalente a 15px */
+    align-content: center;
+    font-size: 1.4em;
+    font-weight: 500;
+    text-shadow: 0.11vh 0.11vh 0.33vh rgba(0, 0, 0, 0.5); /* Sombra proporcional */
+}
+.modal h4 {
+    color: #f1f1f1;
+    margin-bottom: 1.65vh; /* Equivalente a 15px */
+    font-size: 1vh; /* Equivalente a 18px */
+    font-weight: 500;
+    text-shadow: 0.11vh 0.11vh 0.33vh rgba(0, 0, 0, 0.5); /* Sombra proporcional */
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2.2vh; /* Equivalente a 20px */
+}
+
+.ventana-principal {
+    text-align: center;
+    margin: 0 auto;
+    background-size: cover;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #666 transparent;
+}
+
+.ventana-principal .user-list-content::-webkit-scrollbar {
+    width: 0.41vw; /* 8px */
+}
+
+.ventana-principal .user-list-content::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 0.51vw; /* 10px */
+}
+
+.ventana-principal .user-list-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+/* Contenedor para lista de usuarios y ausencias */
+.user-list-container,
+.calend-ausen-container {
+    width: 100%;
+    margin: 2.2vh auto;
+    padding: 1.65vh;
+}
+
+.user-actions {
+    display: none;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+    border-radius: 0.41vw; /* 8px en relación con 1963px de ancho */
+    overflow: hidden;
+}
+
+.tabs-container {
+    position: absolute;
+    top: 30vh; /* 260px en relación con 911px de altura */
+    margin-left: 0.5%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.52vw; /* 10px basado en el ancho */
+    background-color: #333;
+    padding: 1.1vh; /* 10px basado en altura */
+    border-radius: 8px;
+}
+/* Estilo de los botones de las pestañas */
+.tabs-container button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    font-size: 0.9em;
+    padding: 1.1vh; /* 10px en base a la altura */
+    border-radius: 0.21vw; /* 4px en ancho */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: left;
+    width: 100%; 
+}
+
+/* Pestaña activa */
+.tabs-container button.active {
+    background-color: #5fc67d;
+}
+@media (max-width: 1360px) {
+    .tabs-container {
+        display: none;
+    }
+    .user-list-container,
+    .search-filter-container {
+        min-width: 50.125rem; /* Mantiene el ancho mínimo de 450px */
+        max-width: 50.125rem; /* Evita que se encoja más allá de este ancho */
+        margin: 0; /* Elimina margen */
+        padding: 0; /* Elimina padding */
+        overflow-x: auto; /* Permite desplazamiento si es necesario */
+    }
+    .user-list-header{
+        display: none; /* Oculta el encabezado en pantallas más pequeñas */
+    }
+
+    .user-list-header,
+    .user-list-row {
+        min-width: 50.125rem; /* Ancho mínimo */
+        max-width: 50.125rem; /* Ancho máximo para mantener diseño */
+        height: auto; /* Altura constante */
+    }
+}
+/* Rectángulo negro de la pestaña Ausencias / Turnos horarios */
+.calend-ausen-container {
+    width: 70%;
+    margin: 10.98vh auto;
+    background-color: #1e1e1e;
+    color: white;
+    padding: 1.1vh; /* 10px en base a la altura */
+    border-radius: 0.61vw; /* 12px basado en el ancho */
+    box-shadow: 0 0.31vw 0.61vw rgba(0, 0, 0, 0.15); /* 6px, 12px en base al ancho */
+    display: flex;
+    gap: 0.52vw; /* 10px en ancho */
+}
+
+
+.calendar-contain {
+    flex: 1; 
+    margin-left: 0.52vw; /* 10px en relación con 1963px */
+    background-color: #2e2e2e;
+    border-radius: 0.41vw; /* 8px en relación con 1963px */
+    padding: 1.1vh; /* 10px en relación con 911px */
+    overflow: hidden; 
+    white-space: normal; 
+    word-wrap: break-word; 
+}
+/* Contenedor principal de la lista de turnos horarios */
+.turnos-horarios-container {
+    background-color: #2e2e2e;
+    padding: 2.2vh; /* 20px en relación con 911px */
+    border-radius: 0.41vw; /* 8px en relación con 1963px */
+    color: #ffffff;
+    box-shadow: 0 0.21vw 0.41vw rgba(0, 0, 0, 0.3); /* 4px y 8px en relación con 1963px */
+    text-align: left;
+    margin-top: 2.2vh; /* 20px en relación con 911px */
+}
+
+/* Estilo de la lista de turnos horarios */
+.turnos-horarios-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.turnos-horarios-container li {
+    padding: 0.88vh 0; /* 8px en relación con 911px */
+    font-size: 1.75vh; /* 16px en relación con 911px */
+    border-bottom: 0.052vw solid #444; /* 1px en relación con 1963px */
+}
+
+/* Estilo del botón "Añadir turno horario" */
+.turnos-horarios-container button {
+    background-color: #5fc67d;
+    color: white;
+    padding: 1.1vh 2.1vw; /* 10px y 20px en relación con 911px y 1963px */
+    border: none;
+    border-radius: 0.26vw; /* 5px en relación con 1963px */
+    cursor: pointer;
+    font-size: 1.54vh; /* 14px en relación con 911px */
+    font-weight: bold;
+    margin-top: 1.1vh; /* 10px en relación con 911px */
+    margin-left: 30%;
+    transition: background-color 0.3s ease;
+}
+
+.turnos-horarios-container button:hover {
+    background-color: #45b06a;
+}
+/* Estilo de los botones de cada turno horario */
+.turnos-horarios-container ul li button {
+    background-color: #6c757d; /* Gris intermedio */
+    color: #ffffff;
+    border: none;
+    font-size: 1.75vh; /* 16px en relación con 911px */
+    cursor: pointer;
+    text-align: center;
+    padding: 0.88vh 1.1vw; /* Padding en relación con 911px y 1963px */
+    border-radius: 0.26vw; /* Bordes redondeados */
+    transition: all 0.3s ease;
+    box-shadow: 0 0.21vw 0.41vw rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+/* Estilos en hover para el botón */
+.turnos-horarios-container ul li button:hover {
+    background-color: #5a6268; /* Gris más oscuro en hover */
+    color: #ffffff;
+    transform: scale(1.05); /* Aumenta el tamaño al hacer hover */
+    box-shadow: 0 0.31vw 0.62vw rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+}
+
+/* Efecto de click (active) */
+.turnos-horarios-container ul li button:active {
+    background-color: #495057; /* Gris más oscuro al hacer clic */
+    transform: scale(0.95); /* Leve reducción en tamaño */
+    box-shadow: 0 0.15vw 0.31vw rgba(0, 0, 0, 0.3); /* Sombra más pequeña */
+}
+
+
+/* Estilo de los selectores de horas */
+.selectores-horas {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.selectores-horas label {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.selectores-horas select {
+    padding: 5px;
+    border-radius: 0.26vw;    border: none;
+    background-color: #3d3d3d;
+    color: white;
+    box-shadow: 0 0.21vw 0.41vw rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* Efectos de hover y active */
+.selectores-horas select:hover {
+    background-color: #5a5a5a;
+    box-shadow: 0 0.31vw 0.62vw rgba(0, 0, 0, 0.5);
+}
+
+.selectores-horas select:active {
+    background-color: #4a4a4a;
+    box-shadow: inset 0 0.15vw 0.31vw rgba(0, 0, 0, 0.4);
+}
+
+.turno-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55vh 0; /* 5px en relación con 911px */
+}
+.modalT {
+    background-color: #2a2a2a;
+    padding: 2.2vh; /* Aproximadamente equivalente a 20px en tu referencia de 911px */
+    border-radius: 0.9vh; /* Aproximadamente 8px */
+    text-align: center;
+    color: #ffffff;
+    width: 20.7vw; /* Aproximadamente 280px en relación a 1963px */
+  }
+  
+  .modal p {
+    margin-bottom: 2.2vh; /* Aproximadamente 20px */
+  }
+  
+  .modal-actionsT {
+    display: flex;
+    justify-content: space-around;
+}
+
+  .EliminarTurno-btn {
+    /* Estilos personalizados para el botón EliminarTurno */
+    background-color: #d9534f;
+    color: rgb(238, 9, 9);
+    border: none;
+    padding: 1.1vh 2.2vw; /* Aproximadamente 10px x 20px */
+    border-radius: 0.6vh; /* Aproximadamente 5px */
+    cursor: pointer;
+  }
+  
+  .EliminarTurno-btn:hover {
+    background-color: #c9302c;
+  }
+
+  h2 {
+    margin: -2.5% 0 5%;
+    color: #ffffff;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .ventana-box {
+    width: 80%;
+    height: 55%;
+    padding: 2.5rem; /* 40px */
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(16, 106, 137, 0.95); /* último valor: 0.8 = 80% opacidad */
+    box-shadow: 0 0.9375rem 1.5625rem rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-bottom: 1.25rem;
+    border-radius: 0.3125rem;
+
+}

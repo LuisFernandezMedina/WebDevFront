@@ -1,1 +1,81 @@
-<p>ventana-principal works!</p>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<app-header></app-header>
+<div class = "ventana-container">
+    <div class="user-profile">
+        <span class="user-fullname">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</span>
+        <span class="user-edit-button" (click)="navigateTo('/perfil-usuario')" (keydown)="navigateTo('/perfil-usuario')">Visitar perfil</span>
+    </div>
+    
+    <!-- VENTANA PRINCIPAL-->
+    <div class = "ventana-principal">
+        <div class="admin-controls2">
+        <div class="logout-container">
+            <button class="Btn2 logout-btn" (click)="logout()">
+              <div class="sign">
+                <svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg>
+              </div>
+              <div class="text">Cerrar Sesión</div>
+            </button>
+          </div>
+        
+          <!-- Botón Añadir Balance -->
+          <div class="add-balance-container">
+            <button class="Btn3 add-balance-btn" (click)="navigateTo('/anadir-balance')">
+              <div class="sign">
+                <svg viewBox="0 0 512 512">
+                    <path d="M256 32C132.3 32 32 132.3 32 256s100.3 224 224 224
+                             224-100.3 224-224S379.7 32 256 32zm64 240h-48v48c0 8.8-7.2 
+                             16-16 16s-16-7.2-16-16v-48h-48c-8.8 0-16-7.2-16-16s7.2-16 
+                             16-16h48v-48c0-8.8 7.2-16 16-16s16 7.2 16 16v48h48c8.8 0 
+                             16 7.2 16 16s-7.2 16-16 16z"/>
+                  </svg>              </div>
+              <div class="text">Añadir Balance</div>
+            </button>
+          </div>
+
+        </div>
+
+
+        
+        <!--VISTA DE USUARIO -->
+        <div *ngIf="!isAdmin">
+            <div class = "ventana-box">
+                <!-- Vista para el usuario -->
+                <h2>Panel de Usuario</h2>
+                <!--Contenido exclusivo para el usuario -->
+                
+            </div>
+            
+    
+        </div>
+        
+        <!--VISTA DE ADMINISTRADOR -->
+        <div *ngIf="isAdmin">
+            <div *ngIf="activeTab === 'tab1'" class="tab-content">
+            <app-lista-usuarios></app-lista-usuarios>
+            </div>
+            <div *ngIf="activeTab === 'tab2'" class="tab-content">
+            </div>
+            <div *ngIf="activeTab === 'tab3'" class="tab-content"> 
+        </div>
+    </div>
+    
+    <!-- Contenedor para las pestañas, posicionado junto al cuadro negro -->
+    <div *ngIf="isAdmin" class="tabs-container">
+        <button (click)="selectTab('tab1')" [class.active]="activeTab === 'tab1'">Usuarios</button>
+        <button (click)="selectTab('tab2')" [class.active]="activeTab === 'tab2'">Ausencias</button>
+        <button (click)="selectTab('tab3')" [class.active]="activeTab === 'tab3'">Turnos Horarios</button>
+    </div>
+    
+
+</div>
+
+
+<app-footer></app-footer>
+
+
+
+
+
+
