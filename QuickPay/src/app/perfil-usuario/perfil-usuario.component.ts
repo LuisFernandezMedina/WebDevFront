@@ -6,8 +6,6 @@ import { UserService } from '../services/user.service';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
 
-
-
 @Component({
   selector: 'app-perfil-usuario',
   standalone: true,
@@ -17,6 +15,7 @@ import { HeaderComponent } from '../shared/header/header.component';
 })
 export class PerfilUsuarioComponent implements OnInit {
 
+  id: number = 0;
   user = {
     nombre: 'Nombre y apellidos de usuario',
     correo: 'user@correo.com',
@@ -34,24 +33,41 @@ export class PerfilUsuarioComponent implements OnInit {
   ) {}
   
   ngOnInit(): void {
-    const token = sessionStorage.getItem('token') || '';
-    const localEmail = sessionStorage.getItem('email') || '';
-
-    // Obtener el parámetro 'email' de la URL
-    const routeEmail = this.route.snapshot.paramMap.get('email');
-
-    // Determinar el email a usar
-    const emailToUse = routeEmail || localEmail;
-
-    if (token && emailToUse) {
-      this.getUserInfo(emailToUse, token);
+    // Comprobamos que estamos en el navegador
+    alert(sessionStorage.getItem('authToken'))
+    this.token = sessionStorage.getItem('authToken') || '';  
+    const emailToUse = sessionStorage.getItem('email') || '';  
+    
+    if (this.token && emailToUse) {
+      this.getUserInfo(emailToUse, this.token);
     } else {
-      console.error('No se encontró un email válido para cargar el perfil');
+      console.error('No se encontró un email válido o token para cargar el perfil');
+      this.router.navigate(['/login']);
     }
   }
+  
 
   getUserInfo(email: string, token: string): void {
-  
+    this.isLoading = true;
+    this.id = Number(sessionStorage.getItem('userid'));
+    this.userService.getUser(this.id,token).subscribe({
+      next: (response) => {
+        this.user = {
+          nombre: response.name,
+          correo: response.email,
+          balance: response.balance || '0.00'
+        };
+        this.profilePicture = response.profilePicture || 'assets/UsuarioSinFoto.png';
+        this.isLoading = false;
+        alert(this.user.nombre)
+        
+      },
+      
+      error: (error) => {
+        console.error('Error al cargar el usuario:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
   onFileSelected(event: Event): void {
@@ -69,22 +85,17 @@ export class PerfilUsuarioComponent implements OnInit {
     }
   }
 
-  // Método para redirigir a cambiar la contraseña
   navigateToChangePassword(): void {
     this.router.navigate(['/edicion-usuario'], { state: { token: this.token } });
   }
 
-
   editUser(userEmail: string): void {
     if (userEmail) {
-      const token = sessionStorage.getItem('token') || '';
-      const role = this.decodeRoleFromToken(token); // Decodificar el rol desde el token
-  
-      // Redirigir al formulario de edición con el estado del usuario
+      const role = this.decodeRoleFromToken(this.token);
       this.router.navigate(['/edicion-usuario'], {
         state: {
-          user: this.user.correo, // Pasar el correo del usuario
-          role: role // Pasar el rol (administrador o empleado)
+          user: this.user.correo,
+          role: role
         },
       });
     } else {
@@ -92,12 +103,16 @@ export class PerfilUsuarioComponent implements OnInit {
     }
   }
 
-  // Método para decodificar el rol desde el token
-  private decodeRoleFromToken(token: string) {
-   
+  private decodeRoleFromToken(token: string): string {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.role || 'user';
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      return 'user';
+    }
   }
 
-  // Método para redirigir a las diferentes páginas
   navigateTo(route: string): void {
     this.isLoading = true;
     setTimeout(() => {

@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
+import { jwtDecode } from 'jwt-decode'
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import { HeaderComponent } from '../shared/header/header.component';
   providers: [UserService]
 
 })
+
 export class LoginComponent {
   username: string = '';
   password: string = '';
@@ -71,10 +73,15 @@ export class LoginComponent {
                 if (token) {
                     console.log("Token recibido:", token);                  
                     // Guardar el token en sessionStorage
-                    sessionStorage.setItem('authToken', token);                    
+                    sessionStorage.setItem('authToken', token); 
+                    sessionStorage.setItem('email', user.email);
+                    const decodedToken: any = jwtDecode(token);
+                    sessionStorage.setItem('userid', decodedToken.user_id); // Extraer el rol del token
+                    console.log("Token recibido:", decodedToken.user_id);
                     this.isLoading = false;
                     this.loginFailed = false;
                     alert('Login exitoso');
+                    alert(sessionStorage.getItem('authToken'));
                     
                     this.router.navigate(['/ventana-principal']);
                 } else {

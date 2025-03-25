@@ -48,4 +48,12 @@ export class UserService {
       Authorization: `Bearer ${token}`,
     });
   }
+
+  // 🔹 OBTENER USUARIO POR EMAIL
+  getUserByEmail(email: string, token: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/email/${encodeURIComponent(email)}`, {
+      headers: this.getAuthHeaders(token),
+    });
+  }
+  
 }

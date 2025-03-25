@@ -76,7 +76,7 @@ export class VentanaPrincipalComponent implements OnInit {
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token') || '';
     const localEmail = sessionStorage.getItem('email') || '';
-  
+    alert(sessionStorage.getItem('authToken'));
     
 
 
@@ -108,12 +108,14 @@ export class VentanaPrincipalComponent implements OnInit {
   }
   visitProfile(selectedUser: any): void {
     if (selectedUser) {
+      sessionStorage.setItem('email', selectedUser.email);
       const route = selectedUser.isAdmin ? '/perfil-admin' : '/perfil-usuario';
-      this.router.navigate([route, { email: selectedUser.email }]);
+      this.router.navigate([route]);
     } else {
       console.error('El usuario seleccionado no está definido');
     }
   }
+  
 
   selectTab(tab: string) {
     this.activeTab = tab;
