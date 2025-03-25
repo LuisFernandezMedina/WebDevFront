@@ -3,7 +3,7 @@
 <app-header></app-header>
 <div class = "ventana-container">
     <div class="user-profile">
-        <span class="user-fullname">{{ loggedUser.firstName }} {{ loggedUser.lastName }}</span>
+        <span class="user-fullname">{{ localEmail }}</span>
         <span class="user-edit-button" (click)="navigateTo('/perfil-usuario')" (keydown)="navigateTo('/perfil-usuario')">Visitar perfil</span>
     </div>
     

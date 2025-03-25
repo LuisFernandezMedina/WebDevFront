@@ -34,7 +34,7 @@ export class PerfilUsuarioComponent implements OnInit {
   
   ngOnInit(): void {
     // Comprobamos que estamos en el navegador
-    alert(sessionStorage.getItem('authToken'))
+    //alert(sessionStorage.getItem('authToken'))
     this.token = sessionStorage.getItem('authToken') || '';  
     const emailToUse = sessionStorage.getItem('email') || '';  
     
