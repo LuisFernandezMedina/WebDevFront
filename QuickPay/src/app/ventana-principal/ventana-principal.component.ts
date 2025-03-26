@@ -102,15 +102,10 @@ export class VentanaPrincipalComponent implements OnInit {
     }
   }
   logout(): void {
-    this.isLoading = true;
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('email');
-    sessionStorage.removeItem('2f');
-    setTimeout(() => {
-      this.isLoading = false;
-      this.router.navigate(['/login']);
-    }, 1000);
+    sessionStorage.clear();
+    this.router.navigate(['/login']); 
   }
+  
   visitProfile(selectedUser: any): void {
     if (selectedUser) {
       sessionStorage.setItem('email', selectedUser.email);

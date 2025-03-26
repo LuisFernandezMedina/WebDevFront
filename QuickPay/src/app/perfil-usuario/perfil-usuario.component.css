@@ -122,9 +122,57 @@
   .actions {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
     margin-top: 20px;
   }
+  .actions button {
+    flex: 1 1 10em; /* crecimiento, reducción, tamaño base */
+    max-width: 10em; /* evitar que se estiren demasiado */
+    padding: 0.8em 0;
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btnEditar {
+    background-color:#007bff;/* azul suave */
+    
+    color: white;
+    
+  }
+  
+  .btnEditar:hover {
+    background-color: #138496;
+  }
+  
+  .btnGuardar {
+    background-color: #28a745; /* verde */
+  
+    color: white;
+
+    transition: background-color 0.3s;
+  }
+  
+  .btnGuardar:hover {
+    background-color: #218838;
+  }
+  
+  .btnCancelar {
+    background-color: #dc3545; /* rojo */
+    
+    color: white;
+   
+    transition: background-color 0.3s;
+  }
+  
+  .btnCancelar:hover {
+    background-color: #c82333;
+  }
+  
   
   /* Botón básico */
   .btn {
@@ -160,6 +208,34 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+  input[type="text"] {
+    font-size: 1em;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 4px 6px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.4); /* ✅ Borde claro pero suave */
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+  }
+  
+  input[type="text"]::placeholder {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+  }
+  
+  input[type="text"]:focus {
+    font-size: 1em;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid #ffffff; /* ✅ Se vuelve más visible al hacer foco */
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.4); /* ✅ Ligera sombra para resaltar */
+  }
+  
+  
   
   
   /* Ajustes responsivos para pantallas medianas */
@@ -214,4 +290,5 @@
       padding: 6px 10px;
       font-size: 12px;
     }
+    
 }
