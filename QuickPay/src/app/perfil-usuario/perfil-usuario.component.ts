@@ -19,12 +19,14 @@ export class PerfilUsuarioComponent implements OnInit {
   user = {
     nombre: 'Nombre y apellidos de usuario',
     correo: 'user@correo.com',
-    balance: '9999.00'
+    balance: '9999.00',
+    newPassword: ''
   };
 
   profilePicture: string | ArrayBuffer | null = 'assets/UsuarioSinFoto.png';
   isLoading: boolean = false;
   token: string = '';
+  isEditing: boolean = false;
 
   constructor(
     private readonly router: Router,
@@ -34,7 +36,7 @@ export class PerfilUsuarioComponent implements OnInit {
   
   ngOnInit(): void {
     // Comprobamos que estamos en el navegador
-    alert(sessionStorage.getItem('authToken'))
+    //alert(sessionStorage.getItem('authToken'))
     this.token = sessionStorage.getItem('authToken') || '';  
     const emailToUse = sessionStorage.getItem('email') || '';  
     
@@ -55,11 +57,12 @@ export class PerfilUsuarioComponent implements OnInit {
         this.user = {
           nombre: response.name,
           correo: response.email,
-          balance: response.balance || '0.00'
+          balance: response.balance || '0.00',
+          newPassword: ''
         };
         this.profilePicture = response.profilePicture || 'assets/UsuarioSinFoto.png';
         this.isLoading = false;
-        alert(this.user.nombre)
+        //alert(this.user.nombre)
         
       },
       
@@ -68,6 +71,40 @@ export class PerfilUsuarioComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  
+  toggleEdit(): void {
+    this.isEditing = !this.isEditing;
+
+    if (!this.isEditing) {
+      this.getUserInfo(this.user.correo, this.token);
+    }
+  }
+
+  saveChanges(): void {
+    const updatedData: any = { name: this.user.nombre };
+
+    if (this.user.newPassword) {
+      updatedData.password = this.user.newPassword;
+    }
+
+    this.userService.updateUser(this.id, updatedData, this.token).subscribe({
+      next: (response) => {
+        console.log('Perfil actualizado:', response);
+        alert('Perfil actualizado correctamente');
+        this.user.newPassword = ''; 
+        this.isEditing = false;
+      },
+      error: (error) => {
+        console.error('Error al actualizar perfil:', error);
+        alert('Error al actualizar el perfil');
+      },
+    });
+  }
+
+  isFormValid(): boolean {
+    return this.user.nombre.trim() !== '';
   }
 
   onFileSelected(event: Event): void {
@@ -120,4 +157,5 @@ export class PerfilUsuarioComponent implements OnInit {
       this.router.navigate([route]);
     }, 1000);
   }
+  
 }

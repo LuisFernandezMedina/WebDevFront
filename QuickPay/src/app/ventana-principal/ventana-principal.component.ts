@@ -25,12 +25,20 @@ export class VentanaPrincipalComponent implements OnInit {
   countdown: number = 5;
   countdownInterval: any;
   activeTab: string = 'tab1'; // Por defecto, la pestaña 1 está activa
+  id: number = 0;
+  localEmail: string = '';
 
   loggedUser: any = {
     firstName: 'John',
     lastName: 'Doe',
     profilePicture: '/assets/images/UsuarioSinFoto.png',
     role: 'admin'
+  };
+
+  user = {
+    nombre: 'Nombre y apellidos de usuario',
+    correo: 'user@correo.com',
+    balance: '9999.00'
   };
 
   /*ESTO QUIZAS HAYA Q QUITARLO */
@@ -75,11 +83,8 @@ export class VentanaPrincipalComponent implements OnInit {
   
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token') || '';
-    const localEmail = sessionStorage.getItem('email') || '';
-    alert(sessionStorage.getItem('authToken'));
-    
-
-
+    this.localEmail = sessionStorage.getItem('email') || '';
+    //alert(sessionStorage.getItem('authToken'));
   }
 
   private isAdminUser(): boolean {
