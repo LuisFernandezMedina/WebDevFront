@@ -7,18 +7,24 @@
     <!-- Imagen de perfil -->
     <div class="profile-picture-container">
       <img [src]="profilePicture" alt="Foto de perfil" class="profile-picture" />
-      <input type="file" (change)="onFileSelected($event)" class="upload-button" />
+      <input type="file" (change)="onFileSelected($event)" class="upload-button" *ngIf="isEditing" />
     </div>
 
     <!-- Información del usuario -->
     <div class="info-field">
       <label>Nombre y Apellidos</label>
-      <p>{{ user.nombre }}</p>
+      <p *ngIf="!isEditing">{{ user.nombre }}</p>
+      <input type="text" [(ngModel)]="user.nombre" *ngIf="isEditing" />
     </div>
 
     <div class="info-field">
       <label>Correo</label>
       <p>{{ user.correo }}</p>
+    </div>
+
+    <div class="info-field" *ngIf="isEditing">
+      <label>Nueva Contraseña</label>
+      <input type="password" [(ngModel)]="user.newPassword" placeholder="Dejar vacío para no cambiar" />
     </div>
 
     <div class="info-field">
@@ -28,8 +34,9 @@
 
     <!-- Botones de acción -->
     <div class="actions">
-      <button class="btn" (click)="editUser(user.correo)">Editar Perfil</button>
-      <button class="btn secondary" (click)="navigateToChangePassword()">Cambiar Contraseña</button>
+      <button class="btnEditar" *ngIf="!isEditing" (click)="toggleEdit()">Editar Perfil</button>
+      <button class="btnGuardar" (click)="saveChanges()" [disabled]="!isFormValid()">Guardar Cambios</button>
+      <button class="btnCancelar" (click)="toggleEdit()">Cancelar</button>
     </div>
   </div>
 

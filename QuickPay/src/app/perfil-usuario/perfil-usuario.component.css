@@ -118,6 +118,49 @@
   .back-button:hover {
     background-color: #0056b3;
   }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Botón básico */
+  .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: none;
+  }
+  
+  /* Botón "Editar" */
+  .btn.btnEditar {
+    background-color: #007bff;
+    ;
+    color: #fff;
+  }
+  
+  /* Botón "Guardar Cambios" */
+  .btn.btnGuardar {
+    background-color: #2196F3;
+    color: #fff;
+  }
+  
+  /* Botón "Cancelar" */
+  .btn.btnCancelar {
+    background-color: #2196F3;
+    color: #fff;
+  }
+  
+  /* Deshabilitado */
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
   
   /* Ajustes responsivos para pantallas medianas */
   @media (max-width: 768px) {
