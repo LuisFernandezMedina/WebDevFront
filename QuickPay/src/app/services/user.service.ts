@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://127.0.0.1:3000'; // URL del backend de Rails
+  private apiUrl = 'http://127.0.0.1:3001'; // URL del backend de Rails
 
   constructor(private http: HttpClient) {}
 
@@ -55,5 +55,18 @@ export class UserService {
       headers: this.getAuthHeaders(token),
     });
   }
+  addBalance(userId: number, amount: number, token: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/users/${userId}/add_balance`, { amount }, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+  
+  retireBalance(userId: number, amount: number, token: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/users/${userId}/retire_balance`, { amount }, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+  
+  
   
 }
