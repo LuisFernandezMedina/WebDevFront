@@ -89,6 +89,7 @@ export class AnadirBalanceComponent {
         }
       },
       error: () => {
+        alert('User: ' + cardInfo);
         this.message = 'Error en la validación de la tarjeta.';
         this.isError = true;
         this.isLoading = false;

@@ -26,7 +26,7 @@ export class CreditCardService {
   }
 
   // 🔹 Validar tarjeta (BACKEND: 4000)
-  validateCard(cardInfo: { card_number: string; cardholder_name: string; cvv: string }): Observable<boolean> {
+  validateCard(cardInfo: { card_number: string; cardholder_name: string; cvv: string; expiration_date: string }): Observable<boolean> {
     return this.http.post<boolean>(`${this.cardApiUrl}/validate_card`, cardInfo);
   }
 
