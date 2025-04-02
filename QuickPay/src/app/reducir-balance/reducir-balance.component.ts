@@ -12,13 +12,13 @@ import { HeaderComponent } from '../shared/header/header.component';
   selector: 'app-anadir-balance',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, FooterComponent, HeaderComponent],
-  templateUrl: './anadir-balance.component.html',
-  styleUrl: './anadir-balance.component.css'
+  templateUrl: './reducir-balance.component.html',
+  styleUrl: './reducir-balance.component.css'
 })
 
-export class AnadirBalanceComponent implements OnInit {
+export class ReducirBalanceComponent implements OnInit {
   user: any = { balance: 0 };
-  direction: 'in' | 'out' = 'out';
+  direction: 'in' | 'out' = 'in';
   card_number: string = '';
   cardholder_name: string = '';
   expiration_date: string = '';
@@ -76,25 +76,32 @@ export class AnadirBalanceComponent implements OnInit {
 
     const userId = Number(sessionStorage.getItem('userid'));
 
-    
-      //Add balance to the user from the card
+    if (this.direction === 'in') {
+      //Add balance to the card from the user
+      if (this.user.balance < this.amount) {
+        this.message = 'Insufficient balance in the user account';
+        this.isError = true;
+        this.isLoading = false;
+        return;
+      }
+
       this.creditCardService.transfer(transferPayload).subscribe({
         next: (res) => {
           if (res.success) {
-            this.userService.addBalance(userId, this.amount, token).subscribe({
+            this.userService.retireBalance(userId, this.amount, token).subscribe({
               next: () => {
-                this.user.balance += this.amount; // Add to user balance
-                this.message = 'Balance added successfully from the card';
+                this.user.balance -= this.amount; // Deduct from user balance
+                this.message = 'Transfer to the card successful';
                 this.isLoading = false;
               },
               error: () => {
-                this.message = 'Error updating the user balance';
+                this.message = 'Error while withdrawing balance from the user';
                 this.isError = true;
                 this.isLoading = false;
               }
             });
           } else {
-            this.message = res.error || 'Error loading from the card';
+            this.message = res.error || 'Error transferring to the card';
             this.isError = true;
             this.isLoading = false;
           }
@@ -105,7 +112,8 @@ export class AnadirBalanceComponent implements OnInit {
           this.isLoading = false;
         }
       });
-    
+
+    }
 }
 
 

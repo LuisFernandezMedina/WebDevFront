@@ -132,7 +132,7 @@
 
 
 /* Ambos botones en la misma posición pero sin moverse entre sí */
-.logout-container, .add-balance-container {
+.logout-container, .add-balance-container, .add2-balance-container {
     position: absolute;
     right: 0; /* Se mantiene pegado a la derecha */
 }
@@ -144,6 +144,9 @@
 
 .add-balance-container {
     top: 7vh; /* Ajusta la distancia entre los botones */
+}
+.add2-balance-container {
+    top: 10vh; /* Ajusta la distancia entre los botones */
 }
 
 /* Estilos del botón */
@@ -235,6 +238,21 @@
     box-shadow: 0.22vh 0.22vh 1.1vh rgba(0, 0, 0, 0.199);
     background: linear-gradient(to right, #106a89, #5af09b);
 }
+.Btn4 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 6.04vh; /* Tamaño inicial */
+    height: 6.04vh;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 0.22vh 0.22vh 1.1vh rgba(0, 0, 0, 0.199);
+    background: linear-gradient(to right, #106a89, #5af09b);
+}
 
 
 .Btn3:hover {
@@ -260,6 +278,32 @@
 
 /* Efecto de click en el botón */
 .Btn3:active {
+    transform: translate(0.22vh, 0.22vh); /* Equivalente a 2px */
+}
+
+.Btn4:hover {
+    width: 19.76vh; /* Equivalente a 180px */
+    border-radius: 4.39vh; /* Equivalente a 40px */
+    transition-duration: .3s;
+    
+}
+
+.Btn4:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 0;
+}
+  /* Efecto hover en el texto */
+.Btn4:hover .text {
+    opacity: 1;
+    font-size: 0.9em;
+    width: 70%; /* Equivalente a 70% del ancho total */
+    transition-duration: .3s;
+    padding-right: 1.1vh; /* Equivalente a 10px */
+}
+
+/* Efecto de click en el botón */
+.Btn4:active {
     transform: translate(0.22vh, 0.22vh); /* Equivalente a 2px */
 }
 
