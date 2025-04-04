@@ -66,6 +66,13 @@ export class UserService {
       headers: this.getAuthHeaders(token)
     });
   }
+  // 🔹 OBTENER TODOS LOS USUARIOS
+  getAllUsers(token: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+
   
   
   

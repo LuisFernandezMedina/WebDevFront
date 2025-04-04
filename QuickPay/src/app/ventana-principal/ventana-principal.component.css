@@ -121,7 +121,7 @@
 
 .admin-controls2 {
     position: absolute;
-    top: 10%; /* Ajusta según lo alto que lo quieras */
+    top: 6.5%; /* Ajusta según lo alto que lo quieras */
     right: 2.2vh;
     z-index: 10;
     display: flex;
@@ -143,10 +143,10 @@
 }
 
 .add-balance-container {
-    top: 7vh; /* Ajusta la distancia entre los botones */
+    top: 6.5vh; /* Ajusta la distancia entre los botones */
 }
 .add2-balance-container {
-    top: 10vh; /* Ajusta la distancia entre los botones */
+    top: 6.5vh; /* Ajusta la distancia entre los botones */
 }
 
 /* Estilos del botón */
@@ -251,7 +251,7 @@
     overflow: hidden;
     transition-duration: .3s;
     box-shadow: 0.22vh 0.22vh 1.1vh rgba(0, 0, 0, 0.199);
-    background: linear-gradient(to right, #106a89, #5af09b);
+    background: linear-gradient(to right,  #5af09b,#106a89);
 }
 
 

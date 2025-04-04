@@ -1,1 +1,56 @@
-<p>lista-usuarios works!</p>
+<div class="admin-controls">
+  <button class="Btn" (click)="navigateTo('/registro-admin')">
+    <div class="sign">
+      <svg viewBox="0 0 512 512">
+        <path d="M256 112c17.7 0 32 14.3 32 32v80h80c17.7 0 32 14.3 32 32s-14.3 32-32 32h-80v80c0 17.7-14.3 32-32 32s-32-14.3-32-32v-80h-80c-17.7 0-32-14.3-32-32s14.3-32 32-32h80v-80c0-17.7 14.3-32 32-32z"/>
+      </svg>
+    </div>
+    <div class="text">Añadir Administrador</div>
+  </button>
+</div>
+<!-- Barra de búsqueda y filtros (Solo visible para administradores) -->
+<div class="search-filter-container">
+    <div class="filter-options">
+      
+      <div class="filter-left">
+        <label for="search-by">Search by :</label>
+        <select id="search-by" [(ngModel)]="searchBy">
+          <option value="name">Name</option>
+          <option value="email">Email</option>
+        </select>
+      </div>
+  
+      <div class="filter-center">
+        <input type="text" id="search-input" placeholder="Search" [(ngModel)]="searchQuery">
+      </div>
+  
+    </div>
+  </div>
+  
+
+
+<!-- Lista de usuarios -->
+<div class="center-container">
+  <div class="user-list-container">
+    <div class="user-list-header">
+      <span class="column-header">Nombre</span>
+      <span class="column-header">Correo electrónico</span>
+      <span class="column-header">Acciones</span>
+    </div>
+
+    <div class="user-list-content">
+      <div *ngFor="let user of users" class="user-list-row">
+        <div class="user-data">{{ user.name }}</div>
+        <div class="user-data">{{ user.email }}</div>
+        <div class="user-actions">
+          <button class="action-btn edit-btn" title="Editar">
+            <i class="material-icons">edit</i>
+          </button>
+          <button class="action-btn delete-btn" title="Eliminar">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
