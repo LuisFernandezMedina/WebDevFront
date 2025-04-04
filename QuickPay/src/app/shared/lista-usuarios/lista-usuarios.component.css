@@ -158,7 +158,7 @@
     border-radius: 0.26vw; /* 5px en ancho */
     gap: 0.4vw; /* 5px en ancho */
     border: none;
-    background-color: #525252;
+    background-color: #545c84;
     color: white;
 }
 .filter-options input {
@@ -184,8 +184,8 @@
     padding: 2.2vh; /* Equivalente a 20px */
     border-radius: 1.32vh; /* Equivalente a 12px */
     box-shadow: 0 0.66vh 1.32vh rgba(0, 0, 0, 0.15); /* Equivalente a 6px y 12px */
-    max-height: 60vh; /* Ajusta esta altura según necesites para que no exceda la pantalla */
-    overflow-y: auto;
+    max-height: 45vh; /* Ajusta esta altura según necesites para que no exceda la pantalla */
+    overflow-y: hidden;
 }
 
 
@@ -197,7 +197,8 @@
     padding: 1.65vh; /* Equivalente a 15px */
     margin-bottom: 2%;
     border-radius: 1.32vh; /* Equivalente a 12px */
-    background-color: #333;
+    background-color: #0b2f44;
+    color: #d0f0ff;
     font-weight: bold;
     font-size: 0.9em;
     text-align: left;
@@ -235,7 +236,8 @@
     display: grid;
     padding: 1.65vh; /* 15px en relación con 911px de altura */
     border-radius: 0.61vw; /* 12px en relación con 1963px de ancho */
-    background-color: #2e2e2e;
+    background-color: #00e092;
+    color: #000000;
     margin-bottom: 1.65vh; /* 15px en relación con 911px de altura */
     align-items: center;
     text-align: left;
@@ -245,7 +247,7 @@
 }
 
 .user-list-row:hover {
-    background-color: rgba(56, 56, 56, 0.9);
+    background-color: #1d9370;
 }
 .user-list-row:hover .user-actions {
     display: flex; /* Muestra las acciones al hacer hover */

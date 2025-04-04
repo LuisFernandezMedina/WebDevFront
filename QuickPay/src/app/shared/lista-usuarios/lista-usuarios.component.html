@@ -33,13 +33,13 @@
 <div class="center-container">
   <div class="user-list-container">
     <div class="user-list-header">
-      <span class="column-header">Nombre</span>
-      <span class="column-header">Correo electrónico</span>
-      <span class="column-header">Acciones</span>
+      <span class="column-header">Full Name</span>
+      <span class="column-header">Email</span>
+      <span class="column-header">Actions</span>
     </div>
 
     <div class="user-list-content">
-      <div *ngFor="let user of users" class="user-list-row">
+      <div *ngFor="let user of filteredUsers" class="user-list-row">
         <div class="user-data">{{ user.name }}</div>
         <div class="user-data">{{ user.email }}</div>
         <div class="user-actions">

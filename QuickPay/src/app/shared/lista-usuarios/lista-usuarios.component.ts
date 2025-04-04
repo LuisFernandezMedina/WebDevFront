@@ -21,10 +21,10 @@ export class ListaUsuariosComponent implements OnInit{
   showDeleteModal: boolean = false;
   countdown: number = 5;
   countdownInterval: any;
-  searchBy: string = 'name';
   searchQuery: string = '';
   filterBy: string = 'all';
   myemail: string = '';
+  searchBy: 'name' | 'email' = 'name';
 
 
   
@@ -77,15 +77,76 @@ export class ListaUsuariosComponent implements OnInit{
       name: 'Maria González',
       email: 'maria2.gonzalez@example.com',
       balance: 75.25
+    },
+    {
+      name: 'Maria González Diaz del Campo Blanco de Castilla',
+      email: 'maria.gonzalez@example.com',
+      balance: 50.50
+    },
+    {
+      name: 'Maria González',
+      email: 'maria2.gonzalez@example.com',
+      balance: 75.25
+    },
+    {
+      name: 'Maria González Diaz del Campo Blanco de Castilla',
+      email: 'maria.gonzalez@example.com',
+      balance: 50.50
+    },
+    {
+      name: 'Maria González',
+      email: 'maria2.gonzalez@example.com',
+      balance: 75.25
+    },
+    {
+      name: 'Maria González Diaz del Campo Blanco de Castilla',
+      email: 'maria.gonzalez@example.com',
+      balance: 50.50
+    },
+    {
+      name: 'Maria González',
+      email: 'maria2.gonzalez@example.com',
+      balance: 75.25
+    },
+    {
+      name: 'Maria González Diaz del Campo Blanco de Castilla',
+      email: 'maria.gonzalez@example.com',
+      balance: 50.50
+    },
+    {
+      name: 'Maria González',
+      email: 'maria2.gonzalez@example.com',
+      balance: 75.25
     }
   ];
 
   ngOnInit(): void {
-    
-    
-
+    const token = sessionStorage.getItem('authToken');
+    if (token) {
+      this.userService.getAllUsers(token).subscribe({
+        next: (data) => {
+          this.users = data;
+        },
+        error: (err) => {
+          console.error('Error al obtener usuarios:', err);
+        }
+      });
+    } else {
+      console.error('No token found in sessionStorage');
+    }
     
   }
+  get filteredUsers() {
+    return this.users.filter(user =>
+      String(user[this.searchBy as keyof typeof user])
+        .toLowerCase()
+        .includes(this.searchQuery.toLowerCase())
+    );
+  }
+  
+  
+  
+  
   
 
 
