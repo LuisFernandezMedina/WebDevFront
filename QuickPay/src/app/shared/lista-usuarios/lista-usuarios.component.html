@@ -69,6 +69,59 @@
   </div>
 </div>
 
+<div *ngIf="selectedTab === 'friends'">
+
+  <div class="search-filter-container">
+    
+      <div class="filter-options">
+        
+        <div class="filter-left">
+          <label for="search-by">Search by :</label>
+          <select id="search-by" [(ngModel)]="searchBy">
+            <option value="name">Name</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
+    
+        <div class="filter-center">
+          <input type="text" id="search-input" placeholder="Search" [(ngModel)]="searchQuery">
+        </div>
+    
+      </div>
+    </div>
+    
+
+
+  <!-- Lista de usuarios -->
+  <div class="center-container">
+    <div class="user-list-container">
+      <div class="user-list-header">
+        <span class="column-header">Full Name</span>
+        <span class="column-header">Email</span>
+        <span class="column-header">Actions</span>
+      </div>
+
+      <div class="user-list-content">
+        <div *ngFor="let user of filteredUsers" class="user-list-row">
+          <div class="user-data">{{ user.name }}</div>
+          <div class="user-data">{{ user.email }}</div>
+          
+          <div class="user-actions">
+            <button class="action-btn request-btn" title="Request Money">
+              <i class="material-icons">request_quote</i>
+            </button>
+            <button class="action-btn send-btn" title="Send Money">
+              <i class="material-icons">send</i>
+            </button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div *ngIf="selectedTab === 'transactions'">
     <div class="tr-list-container">
       <div class="tr-list-header">
