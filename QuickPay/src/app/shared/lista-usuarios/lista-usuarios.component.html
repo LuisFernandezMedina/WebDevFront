@@ -8,49 +8,84 @@
     <div class="text">Añadir Administrador</div>
   </button>
 </div>
-<!-- Barra de búsqueda y filtros (Solo visible para administradores) -->
-<div class="search-filter-container">
-    <div class="filter-options">
-      
-      <div class="filter-left">
-        <label for="search-by">Search by :</label>
-        <select id="search-by" [(ngModel)]="searchBy">
-          <option value="name">Name</option>
-          <option value="email">Email</option>
-        </select>
+
+<div class="tab-selector">
+  <button [class.active-tab]="selectedTab === 'find'" (click)="selectTab('find')">Find</button>
+  <button [class.active-tab]="selectedTab === 'friends'" (click)="selectTab('friends')">Friends</button>
+  <button [class.active-tab]="selectedTab === 'transactions'" (click)="selectTab('transactions')">My Transactions</button>
+</div>
+
+
+
+<div *ngIf="selectedTab === 'find'">
+
+  <div class="search-filter-container">
+    
+      <div class="filter-options">
+        
+        <div class="filter-left">
+          <label for="search-by">Search by :</label>
+          <select id="search-by" [(ngModel)]="searchBy">
+            <option value="name">Name</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
+    
+        <div class="filter-center">
+          <input type="text" id="search-input" placeholder="Search" [(ngModel)]="searchQuery">
+        </div>
+    
       </div>
-  
-      <div class="filter-center">
-        <input type="text" id="search-input" placeholder="Search" [(ngModel)]="searchQuery">
+    </div>
+    
+
+
+  <!-- Lista de usuarios -->
+  <div class="center-container">
+    <div class="user-list-container">
+      <div class="user-list-header">
+        <span class="column-header">Full Name</span>
+        <span class="column-header">Email</span>
+        <span class="column-header">Actions</span>
       </div>
-  
-    </div>
-  </div>
-  
 
-
-<!-- Lista de usuarios -->
-<div class="center-container">
-  <div class="user-list-container">
-    <div class="user-list-header">
-      <span class="column-header">Full Name</span>
-      <span class="column-header">Email</span>
-      <span class="column-header">Actions</span>
-    </div>
-
-    <div class="user-list-content">
-      <div *ngFor="let user of filteredUsers" class="user-list-row">
-        <div class="user-data">{{ user.name }}</div>
-        <div class="user-data">{{ user.email }}</div>
-        <div class="user-actions">
-          <button class="action-btn edit-btn" title="Editar">
-            <i class="material-icons">edit</i>
-          </button>
-          <button class="action-btn delete-btn" title="Eliminar">
-            <i class="material-icons">delete</i>
-          </button>
+      <div class="user-list-content">
+        <div *ngFor="let user of filteredUsers" class="user-list-row">
+          <div class="user-data">{{ user.name }}</div>
+          <div class="user-data">{{ user.email }}</div>
+          
+          <div class="user-actions">
+            <button class="action-btn request-btn" title="Request Money">
+              <i class="material-icons">request_quote</i>
+            </button>
+            <button class="action-btn send-btn" title="Send Money">
+              <i class="material-icons">send</i>
+            </button>
+          </div>
+          
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div *ngIf="selectedTab === 'transactions'">
+    <div class="tr-list-container">
+      <div class="tr-list-header">
+        <span class="column-header">Sender</span>
+        <span class="column-header">Receiver</span>
+        <span class="column-header">Amount</span>
+        <span class="column-header">Date</span>
+      </div>
+
+      <div class="tr-list-content">
+        <div *ngFor="let tx of transactions" class="tr-list-row">
+          <div class="user-data">{{ tx.sender }}</div>
+          <div class="user-data">{{ tx.receiver }}</div>
+          <div class="user-data">${{ tx.amount }}</div>
+          <div class="user-data">{{ tx.date | date:'shortDate' }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+

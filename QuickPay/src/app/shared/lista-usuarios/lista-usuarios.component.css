@@ -101,6 +101,7 @@
     display: flex;
     flex-direction: column;
     margin-top: -5%; /* Reducido de 20px */
+    z-index: 10;
 
 
 }
@@ -125,6 +126,7 @@
     flex-wrap: wrap;
     gap: 1rem;
     padding: 0rem;
+    z-index: 1;
   }
   .filter-left {
     display: flex;
@@ -184,7 +186,7 @@
     padding: 2.2vh; /* Equivalente a 20px */
     border-radius: 1.32vh; /* Equivalente a 12px */
     box-shadow: 0 0.66vh 1.32vh rgba(0, 0, 0, 0.15); /* Equivalente a 6px y 12px */
-    max-height: 45vh; /* Ajusta esta altura según necesites para que no exceda la pantalla */
+    max-height: 43vh; /* Ajusta esta altura según necesites para que no exceda la pantalla */
     overflow-y: hidden;
 }
 
@@ -215,7 +217,7 @@
 }
 
 .user-list-content {
-    max-height: 54.88vh; /* 500px en relación con 911px de altura */
+    max-height: 54.8vh; /* 500px en relación con 911px de altura */
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #666 transparent;
@@ -235,10 +237,10 @@
 .user-list-row {
     display: grid;
     padding: 1.65vh; /* 15px en relación con 911px de altura */
-    border-radius: 0.61vw; /* 12px en relación con 1963px de ancho */
-    background-color: #00e092;
+    border-radius: 0.4vw; /* 12px en relación con 1963px de ancho */
+    background-color: #dffff4;
     color: #000000;
-    margin-bottom: 1.65vh; /* 15px en relación con 911px de altura */
+    margin-bottom: 1vh; /* 15px en relación con 911px de altura */
     align-items: center;
     text-align: left;
     position: relative;
@@ -247,7 +249,7 @@
 }
 
 .user-list-row:hover {
-    background-color: #1d9370;
+    background-color: #10eba9;
 }
 .user-list-row:hover .user-actions {
     display: flex; /* Muestra las acciones al hacer hover */
@@ -282,92 +284,6 @@
     overflow: hidden;
 }
 
-.block-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #d9534f;
-    color: white;
-    padding: 0.55vh 1.1vw; /* 5px y 10px en relación con 911px de altura y 1963px de ancho */
-    border-radius: 0.41vw;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.54vh; /* 14px en relación con 911px de altura */
-    height: 5vh; /* 40px en relación con 911px de altura */
-    width: 6vw; /* 100px en relación con 1963px de ancho */
-    transition: background-color 0.3s ease;
-    position: relative;
-}
-
-.block-btn.unblocked {
-    background-color: transparent; /* Fondo transparente para el botón desbloqueado */
-    color: #c4c2c2; /* Color de texto e ícono sutil */
-}
-
-.block-btn.unblocked:hover {
-    background-color: #d9534f; /* Fondo verde cuando se hace hover en el estado desbloqueado */
-}
-
-.block-btn i {
-    margin-right: 0.41vw; /* 8px en relación con 1963px de ancho */
-    font-size: 2.2vh; /* 20px en relación con 911px de altura */
-}
-
-.block-btn .block-btn-text {
-    display: none;
-}
-.block-btn.blocked:hover {
-    background-color: #2dc38c; /* Fondo verde cuando se hace hover en el estado desbloqueado */
-}
-.block-btn.blocked:hover .block-btn-text {
-    display: inline; /* Muestra "Desbloquear" en hover cuando está bloqueado */
-    
-}
-
-.block-btn.blocked:hover i {
-    display: none; /* Oculta el icono en hover cuando está bloqueado */
-}
-
-.block-btn.unblocked:hover .block-btn-text {
-    display: inline; /* Muestra "Bloquear" en hover cuando está desbloqueado */
-}
-
-.block-btn.unblocked:hover i {
-    display: none; /* Oculta el icono en hover cuando está desbloqueado */
-}
-
-
-
-.user-status, .blocked-status {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 6vw; /* 100px en relación con 1963px de ancho */
-    height: 5vh; /* 40px en relación con 911px de altura */
-    border-radius: 0.41vw; /* 8px en relación con 1963px de ancho */
-    font-weight: bold;
-    color: white;
-    font-size: 1.54vh; /* 14px en relación con 911px de altura */
-}
-
-
-.user-status i, .blocked-status i {
-    margin-right: 0.41vw; /* 8px en relación con 1963px de ancho */
-}
-
-.status-validado {
-    background-color: #2dc38c;
-}
-
-.status-no-validado {
-    background-color: #6c757d;
-}
-
-.blocked-status {
-    background-color: #dc3545;
-}
-
 
 /* Estilo general para botones */
 .action-btn {
@@ -383,34 +299,9 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-/* Cuando el botón está bloqueado, aplicar un estilo gris */
-.blocked-btn {
-    background: #808080; /* Gris claro */
-    cursor: not-allowed; /* Cambia el cursor a no permitido */
-    color: #535353; /* Cambia el texto a un gris más claro */
-    box-shadow: none; /* Elimina la sombra cuando está bloqueado */
-}
-
-/* Cambia el color del ícono cuando el botón está bloqueado */
-.blocked-btn i {
-    color: #ccc; /* Cambia el color del ícono a gris claro */
-}
 
 
 
-.edit-btn {
-    background: linear-gradient(145deg, #3a82d8, #275a9b);
-    flex: 2;
-    border-top-left-radius: 0.41vw; /* 8px basado en 1963px de ancho */
-    border-bottom-left-radius: 0.41vw;
-}
-
-.delete-btn {
-    background: linear-gradient(145deg, #d0b24a, #a88936);
-    flex: 1;
-    border-top-right-radius: 0.41vw;
-    border-bottom-right-radius: 0.41vw;
-}
 
 
 .action-btn:hover {
@@ -427,27 +318,8 @@
     display: flex;
     flex-direction: column;
     align-items: center; /* Centra el contenido horizontalmente */
-    gap: 20px; /* Espacio entre el filtro y la lista */
     width: 100%;
-    margin-top: 20px; /* Ajusta la distancia respecto al contenido superior */
-}
-
-
-.user-photo img {
-    width: 4.39vh; /* 40px en relación con 911px de altura */
-    height: 4.39vh;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-left: 10%;
-    border: 0.22vw solid #f5f5f5; /* 2px en relación con 1963px de ancho */
-    box-shadow: 0 0.22vh 0.55vh rgba(0, 0, 0, 0.2); /* 2px y 5px en relación con 911px de altura */
-}
-
-.user-photo small {
-    display: block;
-    text-align: center;
-    color: #ccc;
-    font-size: 0.6em; /* 10px en relación con 911px de altura */
+    
 }
 
 
@@ -575,3 +447,141 @@
     text-align: center;
     font-weight: bold;
 }
+.request-btn {
+    background: linear-gradient(145deg, #42a5f5, #1e88e5);
+    flex: 2;
+    border-top-left-radius: 0.41vw;
+    border-bottom-left-radius: 0.41vw;
+  }
+  
+  .send-btn {
+    background: linear-gradient(145deg, #66bb6a, #388e3c);
+    flex: 2;
+    border-top-right-radius: 0.41vw;
+    border-bottom-right-radius: 0.41vw;
+  }
+  
+  /* Icono + texto */
+  .action-btn i {
+    margin-right: 0.4vw;
+    font-size: 2.2vh;
+    transition: transform 0.2s ease;
+  }
+  
+  .btn-label {
+    display: none;
+    font-size: 1.54vh;
+    font-weight: 500;
+  }
+  
+  .action-btn:hover .btn-label {
+    display: inline;
+  }
+  
+  .action-btn:hover i {
+    transform: scale(1.2);
+  }
+  .tab-selector {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 5%;
+    margin-bottom: -1vh;
+    position: relative;
+    top: -8vh; /* <- Esta línea es la clave: sube las tabs */
+    z-index: -1;
+  }
+  
+  
+  .tab-selector button {
+    background: linear-gradient(to top, #1a2e40, #0e3d59);
+    color: #fff;
+    border: 1px solid #0e3d59;
+    border-bottom: none;
+    padding: 1vh 2vw;
+    border-top-left-radius: 1.2vh;
+    border-top-right-radius: 1.2vh;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    margin-right: 0.5vw;
+  }
+  
+  .tab-selector button:hover {
+    background: #6eca89;
+  }
+  
+  .tab-selector .active-tab {
+    background: linear-gradient(to top, #f4d35e, #f0c419);
+    color: #333;
+    border-color: #d1a000;
+    font-weight: 700;
+    box-shadow: none;
+    z-index: 5;
+  }
+
+  .tr-list-container {
+    width: 88.5%;
+    background-color: #10385a;
+    color: white;
+    padding: 2.2vh;
+    border-radius: 1.32vh;
+    box-shadow: 0 0.66vh 1.32vh rgba(0, 0, 0, 0.15);
+    max-height: 45vh;
+    overflow-y: hidden;
+
+    /* 👇 Añade estas líneas para centrarla */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -5%; /* Reducido de 20px */
+
+}
+
+
+.tr-list-header {
+    display: grid;
+
+    padding: 1.65vh; /* Equivalente a 15px */
+    margin-bottom: 2%;
+    border-radius: 1.32vh; /* Equivalente a 12px */
+    background-color: #0b2f44;
+    color: #d0f0ff;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: left;
+    color: #b3b3b3;
+}
+/* Estructura de la lista de usuarios en pantallas grandes */
+.tr-list-header,
+.tr-list-row {
+    display: grid;
+    /*grid-template-columns: 3vw 10vw 1fr 5.5vw 5.5vw 8.1vw; /* Configuración en pantallas grandes */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.tr-list-content {
+    max-height: 54.88vh; /* 500px en relación con 911px de altura */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #666 transparent;
+}
+.tr-list-row {
+    display: grid;
+    padding: 1.65vh; /* 15px en relación con 911px de altura */
+    border-radius: 0.4vw; /* 12px en relación con 1963px de ancho */
+    background-color: #dffff4;
+    color: #000000;
+    margin-bottom: 1vh; /* 15px en relación con 911px de altura */
+    align-items: center;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 0.22vh 0.55vh rgba(0, 0, 0, 0.1); /* 2px y 5px en relación con 911px de altura */
+    transition: background-color 0.3s ease;
+}
+.tr-list-row:hover {
+background-color: #10eba9;
+}
+
+

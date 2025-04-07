@@ -25,6 +25,7 @@ export class ListaUsuariosComponent implements OnInit{
   filterBy: string = 'all';
   myemail: string = '';
   searchBy: 'name' | 'email' = 'name';
+  selectedTab: 'find' | 'friends' | 'transactions' = 'find';
 
 
   
@@ -61,7 +62,13 @@ export class ListaUsuariosComponent implements OnInit{
   }
 
 
-
+  transactions = [
+    { sender: 'Alice Johnson', receiver: 'Bob Smith', amount: 75.00, date: new Date('2024-04-01') },
+    { sender: 'Carlos Diaz', receiver: 'Eva Adams', amount: 120.50, date: new Date('2024-04-02') },
+    { sender: 'Bob Smith', receiver: 'Alice Johnson', amount: 45.25, date: new Date('2024-04-03') },
+    { sender: 'Eva Adams', receiver: 'Carlos Diaz', amount: 60.00, date: new Date('2024-04-04') }
+  ];
+  
   users = [
     {
       name: 'Aaron Smith',
@@ -143,10 +150,11 @@ export class ListaUsuariosComponent implements OnInit{
         .includes(this.searchQuery.toLowerCase())
     );
   }
-  
-  
-  
-  
+
+  selectTab(tab: 'find' | 'friends' | 'transactions') {
+    this.selectedTab = tab;
+  }
+
   
 
 
