@@ -1,0 +1,6 @@
+<h2 *ngIf="tipoOperacion === 'send'">Enviar dinero a {{ usuarioSeleccionado?.name }}</h2>
+<h2 *ngIf="tipoOperacion === 'request'">Solicitar dinero de {{ usuarioSeleccionado?.name }}</h2>
+
+<p>Email: {{ usuarioSeleccionado?.email }}</p>
+
+<!-- Aquí puedes usar un formulario con ngModel para cantidad, concepto, etc. -->

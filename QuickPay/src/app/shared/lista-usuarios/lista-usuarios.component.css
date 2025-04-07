@@ -94,8 +94,8 @@
     border: 1px solid #1c3a4e;
     color: #cde9ff;
     padding: 1.1vh; /* 10px basado en 911px de altura */
-    border-radius: 0.41vw; /* 8px basado en 1963px de ancho */
-    width: 90%;
+    border-radius: 0.2vw; /* 8px basado en 1963px de ancho */
+    width: 95%;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3)	; /* 4px y 8px adaptados */
     margin: 2vh auto; /* 10px basado en altura */
     display: flex;
@@ -180,11 +180,11 @@
 
 /* Lista de usuarios */
 .user-list-container {
-    width:88.5%;
+    width:93.8%;
     background-color: #10385a;
     color: white;
     padding: 2.2vh; /* Equivalente a 20px */
-    border-radius: 1.32vh; /* Equivalente a 12px */
+    border-radius: 0.2vw; /* Equivalente a 12px */
     box-shadow: 0 0.66vh 1.32vh rgba(0, 0, 0, 0.15); /* Equivalente a 6px y 12px */
     max-height: 43vh; /* Ajusta esta altura según necesites para que no exceda la pantalla */
     overflow-y: hidden;
@@ -195,16 +195,16 @@
 .user-list-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-
-    padding: 1.65vh; /* Equivalente a 15px */
-    margin-bottom: 2%;
-    border-radius: 1.32vh; /* Equivalente a 12px */
-    background-color: #0b2f44;
-    color: #d0f0ff;
-    font-weight: bold;
-    font-size: 0.9em;
-    text-align: left;
-    color: #b3b3b3;
+    padding: 1.5vh 2vw; /* Padding vertical y horizontal más balanceado */
+    margin-bottom: 1.5%;
+    border-radius: 8px;
+    background-color: #1e2a38; /* Azul grisáceo profesional */
+    color: #ecf0f1; /* Blanco suave para contraste */
+    font-weight: 600;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Estructura de la lista de usuarios en pantallas grandes */
@@ -236,21 +236,26 @@
 
 .user-list-row {
     display: grid;
-    padding: 1.65vh; /* 15px en relación con 911px de altura */
-    border-radius: 0.4vw; /* 12px en relación con 1963px de ancho */
-    background-color: #dffff4;
-    color: #000000;
-    margin-bottom: 1vh; /* 15px en relación con 911px de altura */
+    grid-template-columns: 1fr 1.5fr 0.5fr;
+
+    padding: 1.5vh 2vw;
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Gris muy claro tipo fondo neutro */
+    color: #2c3e50;
+    margin-bottom: 1vh;
     align-items: center;
     text-align: left;
     position: relative;
-    box-shadow: 0 0.22vh 0.55vh rgba(0, 0, 0, 0.1); /* 2px y 5px en relación con 911px de altura */
-    transition: background-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
 }
 
 .user-list-row:hover {
-    background-color: #10eba9;
+    background-color: #84fcd0; /* Azul clarito al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
+
 .user-list-row:hover .user-actions {
     display: flex; /* Muestra las acciones al hacer hover */
 }
@@ -526,7 +531,7 @@
     background-color: #10385a;
     color: white;
     padding: 2.2vh;
-    border-radius: 1.32vh;
+    border-radius: 0.2vw;
     box-shadow: 0 0.66vh 1.32vh rgba(0, 0, 0, 0.15);
     max-height: 45vh;
     overflow-y: hidden;
@@ -541,16 +546,16 @@
 
 .tr-list-header {
     display: grid;
-
-    padding: 1.65vh; /* Equivalente a 15px */
-    margin-bottom: 2%;
-    border-radius: 1.32vh; /* Equivalente a 12px */
-    background-color: #0b2f44;
-    color: #d0f0ff;
-    font-weight: bold;
-    font-size: 0.9em;
-    text-align: left;
-    color: #b3b3b3;
+    padding: 1.5vh 2vw; /* Padding vertical y horizontal más balanceado */
+    margin-bottom: 1.5%;
+    border-radius: 8px;
+    background-color: #1e2a38; /* Azul grisáceo profesional */
+    color: #ecf0f1; /* Blanco suave para contraste */
+    font-weight: 600;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 /* Estructura de la lista de usuarios en pantallas grandes */
 .tr-list-header,
@@ -568,20 +573,28 @@
     scrollbar-color: #666 transparent;
 }
 .tr-list-row {
-    display: grid;
-    padding: 1.65vh; /* 15px en relación con 911px de altura */
-    border-radius: 0.4vw; /* 12px en relación con 1963px de ancho */
-    background-color: #dffff4;
-    color: #000000;
-    margin-bottom: 1vh; /* 15px en relación con 911px de altura */
-    align-items: center;
-    text-align: left;
-    position: relative;
-    box-shadow: 0 0.22vh 0.55vh rgba(0, 0, 0, 0.1); /* 2px y 5px en relación con 911px de altura */
-    transition: background-color 0.3s ease;
+        display: grid;
+      
+    
+        padding: 1.5vh 2vw;
+        border-radius: 8px;
+        background-color: #f8f9fa; /* Gris muy claro tipo fondo neutro */
+        color: #2c3e50;
+        margin-bottom: 1vh;
+        align-items: center;
+        text-align: left;
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease-in-out;
+    
 }
 .tr-list-row:hover {
-background-color: #10eba9;
+    background-color: #84fcd0; /* Azul clarito al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;}
+
+
+.material-icons {
+    color: white;
+    font-size: 1.6em;
 }
-
-

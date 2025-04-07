@@ -1,13 +1,4 @@
-<div class="admin-controls">
-  <button class="Btn" (click)="navigateTo('/registro-admin')">
-    <div class="sign">
-      <svg viewBox="0 0 512 512">
-        <path d="M256 112c17.7 0 32 14.3 32 32v80h80c17.7 0 32 14.3 32 32s-14.3 32-32 32h-80v80c0 17.7-14.3 32-32 32s-32-14.3-32-32v-80h-80c-17.7 0-32-14.3-32-32s14.3-32 32-32h80v-80c0-17.7 14.3-32 32-32z"/>
-      </svg>
-    </div>
-    <div class="text">Añadir Administrador</div>
-  </button>
-</div>
+
 
 <div class="tab-selector">
   <button [class.active-tab]="selectedTab === 'find'" (click)="selectTab('find')">Find</button>
@@ -55,10 +46,11 @@
           <div class="user-data">{{ user.email }}</div>
           
           <div class="user-actions">
-            <button class="action-btn request-btn" title="Request Money">
+            <button class="action-btn request-btn" title="Request Money" (click)="irABizum('request', user)">
               <i class="material-icons">request_quote</i>
             </button>
-            <button class="action-btn send-btn" title="Send Money">
+            
+            <button class="action-btn send-btn" title="Send Money" (click)="irABizum('send', user)">
               <i class="material-icons">send</i>
             </button>
           </div>
@@ -107,12 +99,14 @@
           <div class="user-data">{{ user.email }}</div>
           
           <div class="user-actions">
-            <button class="action-btn request-btn" title="Request Money">
+            <button class="action-btn request-btn" title="Request Money" (click)="irABizum('request', user)">
               <i class="material-icons">request_quote</i>
             </button>
-            <button class="action-btn send-btn" title="Send Money">
+            
+            <button class="action-btn send-btn" title="Send Money" (click)="irABizum('send', user)">
               <i class="material-icons">send</i>
             </button>
+            
           </div>
           
         </div>

@@ -154,7 +154,11 @@ export class ListaUsuariosComponent implements OnInit{
   selectTab(tab: 'find' | 'friends' | 'transactions') {
     this.selectedTab = tab;
   }
-
+  
+  irABizum(tipo: 'send' | 'request', usuario: any) {
+    this.router.navigate(['/bizum', tipo], { state: { usuario } });
+  }
+  
   
 
 

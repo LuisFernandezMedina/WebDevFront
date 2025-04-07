@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AnadirBalanceComponent } from './anadir-balance/anadir-balance.component';
+import { BizumComponent } from './bizum/bizum.component';
 import { LoginComponent } from './login/login.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { ReducirBalanceComponent } from './reducir-balance/reducir-balance.component';
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: 'perfil-usuario', component: PerfilUsuarioComponent },
   { path: 'anadir-balance', component: AnadirBalanceComponent },
   { path: 'reducir-balance', component: ReducirBalanceComponent },
+  { path: 'bizum/:tipo', component: BizumComponent },
 
 ];
