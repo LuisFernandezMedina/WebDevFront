@@ -1,6 +1,29 @@
-<h2 *ngIf="tipoOperacion === 'send'">Enviar dinero a {{ usuarioSeleccionado?.name }}</h2>
-<h2 *ngIf="tipoOperacion === 'request'">Solicitar dinero de {{ usuarioSeleccionado?.name }}</h2>
+<app-header></app-header>
 
-<p>Email: {{ usuarioSeleccionado?.email }}</p>
+<div class="login-container">
+  <div class="transfer-box">
+    <h2 *ngIf="operationType === 'send'">Send money to <span class="highlight">{{ selectedUser?.name }}</span></h2>
+    <h2 *ngIf="operationType === 'request'">Request money from <span class="highlight">{{ selectedUser?.name }}</span></h2>
 
-<!-- Aquí puedes usar un formulario con ngModel para cantidad, concepto, etc. -->
+    <div *ngIf="operationType === 'send'" class="info-section">
+      <p><span class="label">Sender:</span> {{ loggedUser?.name }} 
+        <span class="balance">(Balance: {{ loggedUser?.balance | currency }})</span>
+      </p>
+      <p><span class="label">Recipient:</span> {{ selectedUser?.name }} <span class="email">({{ selectedUser?.email }})</span></p>
+    </div>
+
+    <div class="form-section">
+      <label for="amount">Amount to send:</label>
+      <div class="input-group">
+        <input id="amount" type="number" [(ngModel)]="amount" min="0" />
+        <button (click)="makeTransfer()">Make Transfer</button>
+      </div>
+    </div>
+
+    <div *ngIf="message" class="message" [ngClass]="{ 'error': error, 'success': !error }">
+      {{ message }}
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

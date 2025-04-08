@@ -670,10 +670,16 @@
     top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(16, 106, 137, 0.95); /* último valor: 0.8 = 80% opacidad */
-    box-shadow: 0 0.9375rem 1.5625rem rgba(255, 255, 255, 0.5);
     text-align: center;
     margin-bottom: 1.25rem;
     border-radius: 0.3125rem;
 
+
+
+
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        box-shadow: 0 0 1vh rgba(0, 0, 0, 0.5);
+    
+    
 }

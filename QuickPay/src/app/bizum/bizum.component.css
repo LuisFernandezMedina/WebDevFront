@@ -1,0 +1,109 @@
+
+.login-container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: 
+    url('/assets/images/background2.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 1.25rem;
+    overflow-y: auto;
+}
+.transfer-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2vh;
+    padding: 4vh 4vw;
+    max-width: 60vw;
+    width: 90vw;
+    color: white;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 1vh rgba(0, 0, 0, 0.5);
+  }
+  .transfer-box h2 {
+    font-size: 3vh;
+    margin-bottom: 3vh;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  .highlight {
+    color: #00e0ff;
+  }
+  
+  .info-section p {
+    font-size: 2.2vh;
+    margin: 1.5vh 0;
+  }
+  
+  .label {
+    font-weight: 600;
+    color: #ffffff;
+  }
+  
+  .balance {
+    color: #76ff03;
+    font-weight: 500;
+  }
+  
+  .email {
+    color: #c5cae9;
+    font-size: 1.9vh;
+  }
+  
+  .form-section {
+    margin-top: 4vh;
+  }
+  
+  label {
+    font-size: 2vh;
+    display: block;
+    margin-bottom: 1vh;
+  }
+  
+  .input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+  }
+  
+  input[type="number"] {
+    padding: 1vh 1vw;
+    font-size: 2vh;
+    border-radius: 1vh;
+    border: none;
+    width: 30vw;
+  }
+  
+  button {
+    padding: 1.2vh 2.5vw;
+    font-size: 2vh;
+    border-radius: 1vh;
+    border: none;
+    background-color: #00bcd4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0097a7;
+  }
+  
+  .message {
+    margin-top: 3vh;
+    font-size: 2.1vh;
+    font-weight: 500;
+  }
+  
+  .message.error {
+    color: #ff5252;
+  }
+  
+  .message.success {
+    color: #69f0ae;
+  }

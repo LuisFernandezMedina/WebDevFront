@@ -15,14 +15,14 @@
     align-items: center;
     width: 50vw;
     max-width: 700px;
-    background-color: rgba(16, 106, 137, 0.99);
     padding: 0.5rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
     position: absolute;
     top: 58%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    box-shadow: 0 0 1vh rgba(0, 0, 0, 0.5);
 }
 
 .form-container {
