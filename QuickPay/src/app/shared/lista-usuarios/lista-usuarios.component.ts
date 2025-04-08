@@ -26,6 +26,8 @@ export class ListaUsuariosComponent implements OnInit{
   myemail: string = '';
   searchBy: 'name' | 'email' = 'name';
   selectedTab: 'find' | 'friends' | 'transactions' = 'find';
+  userId: number = 0;
+
 
 
   
@@ -60,6 +62,33 @@ export class ListaUsuariosComponent implements OnInit{
   loadAllUsers(): void {
     
   }
+  loadTransactions(): void {
+    if (!this.token || !this.userId) return;
+  
+    this.userService.getTransactions(this.userId, this.token).subscribe({
+      next: (data) => {
+        const sent = data.sent.map((t: any) => ({
+          sender: 'You',
+          receiver: t.to,
+          amount: t.amount,
+          date: new Date(t.date)
+        }));
+  
+        const received = data.received.map((t: any) => ({
+          sender: t.from,
+          receiver: 'You',
+          amount: t.amount,
+          date: new Date(t.date)
+        }));
+  
+        this.transactions = [...sent, ...received].sort((a, b) => b.date.getTime() - a.date.getTime());
+      },
+      error: (err) => {
+        console.error('Error al obtener transacciones:', err);
+      }
+    });
+  }
+  
 
 
   transactions = [
@@ -129,7 +158,11 @@ export class ListaUsuariosComponent implements OnInit{
 
   ngOnInit(): void {
     const token = sessionStorage.getItem('authToken');
-    if (token) {
+    const userIdStr = sessionStorage.getItem('userid'); 
+    if (token && userIdStr) {
+      this.token = token;
+      this.userId = parseInt(userIdStr, 10);
+  
       this.userService.getAllUsers(token).subscribe({
         next: (data) => {
           this.users = data;
@@ -138,6 +171,8 @@ export class ListaUsuariosComponent implements OnInit{
           console.error('Error al obtener usuarios:', err);
         }
       });
+  
+      this.loadTransactions();
     } else {
       console.error('No token found in sessionStorage');
     }

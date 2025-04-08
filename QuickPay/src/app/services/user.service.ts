@@ -73,6 +73,23 @@ export class UserService {
     });
   }
 
+    // 🔹 OBTENER TRANSACCIONES DE UN USUARIO
+  getTransactions(userId: number, token: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/${userId}/transactions`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+
+  // 🔹 TRANSFERIR DINERO ENTRE USUARIOS
+  transferMoney(senderId: number, receiverId: number, amount: number, token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/transfer_money`, {
+      sender_id: senderId,
+      receiver_id: receiverId,
+      amount: amount
+    }, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
   
   
   
