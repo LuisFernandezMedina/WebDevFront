@@ -25,7 +25,7 @@ export class ListaUsuariosComponent implements OnInit{
   filterBy: string = 'all';
   myemail: string = '';
   searchBy: 'name' | 'email' = 'name';
-  selectedTab: 'find' | 'friends' | 'transactions' = 'find';
+  selectedTab: 'find' | 'friends' | 'transactions' | 'requests' = 'find';
   userId: number = 0;
 
 
@@ -186,14 +186,30 @@ export class ListaUsuariosComponent implements OnInit{
     );
   }
 
-  selectTab(tab: 'find' | 'friends' | 'transactions') {
+  selectTab(tab: 'find' | 'friends' | 'transactions' | 'requests') {
     this.selectedTab = tab;
   }
   
   irABizum(tipo: 'send' | 'request', usuario: any) {
     this.router.navigate(['/bizum', tipo], { state: { usuario } });
   }
+  requests: { requester: string; amount: number }[] = [
+    { requester: 'John Doe', amount: 25.00 },
+    { requester: 'Alice Smith', amount: 40.50 },
+    { requester: 'Michael Johnson', amount: 10.75 }
+  ];
   
+
+acceptRequest(request: any) {
+  console.log(`Accepted request from ${request.requester} for $${request.amount}`);
+  // Aquí podrías eliminar el request de la lista o marcarlo como aceptado
+}
+
+rejectRequest(request: any) {
+  console.log(`Rejected request from ${request.requester} for $${request.amount}`);
+  // Igual que arriba, actualizar estado o eliminar
+}
+
   
 
 

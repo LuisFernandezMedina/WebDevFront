@@ -2,21 +2,47 @@
 
 <div class="login-container">
   <div class="transfer-box">
-    <h2 *ngIf="operationType === 'send'">Send money to <span class="highlight">{{ selectedUser?.name }}</span></h2>
-    <h2 *ngIf="operationType === 'request'">Request money from <span class="highlight">{{ selectedUser?.name }}</span></h2>
+    <h2 *ngIf="operationType === 'send'">
+      Send money to <span class="highlight">{{ selectedUser?.name }}</span>
+    </h2>
+    <h2 *ngIf="operationType === 'request'">
+      Request money from <span class="highlight">{{ selectedUser?.name }}</span>
+    </h2>
 
+    <!-- SEND MODE -->
     <div *ngIf="operationType === 'send'" class="info-section">
-      <p><span class="label">Sender:</span> {{ loggedUser?.name }} 
+      <p><span class="label">Sender:</span> {{ loggedUser?.name }}
         <span class="balance">(Balance: {{ loggedUser?.balance | currency }})</span>
       </p>
-      <p><span class="label">Recipient:</span> {{ selectedUser?.name }} <span class="email">({{ selectedUser?.email }})</span></p>
+      <p><span class="label">Recipient:</span> {{ selectedUser?.name }} 
+        <span class="email">({{ selectedUser?.email }})</span>
+      </p>
+    </div>
+
+    <!-- REQUEST MODE -->
+    <div *ngIf="operationType === 'request'" class="info-section">
+      <p><span class="label">Requester:</span> {{ loggedUser?.name }}</p>
+      <p><span class="label">To:</span> {{ selectedUser?.name }}
+        <span class="email">({{ selectedUser?.email }})</span>
+      </p>
     </div>
 
     <div class="form-section">
-      <label for="amount">Amount to send:</label>
+      <label for="amount">
+        {{ operationType === 'send' ? 'Amount to send:' : 'Amount to request:' }}
+      </label>
       <div class="input-group">
         <input id="amount" type="number" [(ngModel)]="amount" min="0" />
-        <button (click)="makeTransfer()">Make Transfer</button>
+        <button 
+          *ngIf="operationType === 'send'" 
+          (click)="makeTransfer()">
+          Make Transfer
+        </button>
+        <button 
+          *ngIf="operationType === 'request'" 
+          (click)="newRequest()">
+          Request Transfer
+        </button>
       </div>
     </div>
 
@@ -24,6 +50,10 @@
       {{ message }}
     </div>
   </div>
+</div>
+
+<div class="back-button-container">
+  <button class="back-button" (click)="navigateTo('/ventana-principal')">Back</button>
 </div>
 
 <app-footer></app-footer>

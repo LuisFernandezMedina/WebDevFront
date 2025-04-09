@@ -52,6 +52,9 @@ export class BizumComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+  navigateTo(route: string): void {
+    this.router.navigate([route]);
+  }
 
   makeTransfer(): void {
     if (!this.amount || this.amount <= 0) {

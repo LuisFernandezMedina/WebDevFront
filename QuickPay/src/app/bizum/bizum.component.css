@@ -107,3 +107,24 @@
   .message.success {
     color: #69f0ae;
   }
+  
+.back-button-container {
+  width: 35%;
+  position: fixed;
+  bottom: 8%;
+  left: 2%;
+}
+
+.back-button {
+  background-color: #007bff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
