@@ -41,31 +41,27 @@ export class UserService {
     });
   }
 
-  // 🔹 GENERAR HEADERS CON TOKEN
-  private getAuthHeaders(token: string) {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    });
-  }
-
   // 🔹 OBTENER USUARIO POR EMAIL
   getUserByEmail(email: string, token: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/users/email/${encodeURIComponent(email)}`, {
       headers: this.getAuthHeaders(token),
     });
   }
+
+  // 🔹 AÑADIR SALDO
   addBalance(userId: number, amount: number, token: string): Observable<any> {
     return this.http.patch(`${this.apiUrl}/users/${userId}/add_balance`, { amount }, {
       headers: this.getAuthHeaders(token)
     });
   }
-  
+
+  // 🔹 RETIRAR SALDO
   retireBalance(userId: number, amount: number, token: string): Observable<any> {
     return this.http.patch(`${this.apiUrl}/users/${userId}/retire_balance`, { amount }, {
       headers: this.getAuthHeaders(token)
     });
   }
+
   // 🔹 OBTENER TODOS LOS USUARIOS
   getAllUsers(token: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/users`, {
@@ -73,7 +69,7 @@ export class UserService {
     });
   }
 
-    // 🔹 OBTENER TRANSACCIONES DE UN USUARIO
+  // 🔹 OBTENER TRANSACCIONES DE UN USUARIO
   getTransactions(userId: number, token: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/users/${userId}/transactions`, {
       headers: this.getAuthHeaders(token)
@@ -90,7 +86,44 @@ export class UserService {
       headers: this.getAuthHeaders(token)
     });
   }
-  
-  
-  
+
+  // 🆕 🔹 CREAR NUEVA SOLICITUD DE DINERO
+  newRequest(requesterId: number, recipientId: number, amount: number, token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/requests`, {
+      requester_id: requesterId,
+      recipient_id: recipientId,
+      amount: amount
+    }, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+
+  // 🆕 🔹 VER SOLICITUDES ENVIADAS Y RECIBIDAS
+  myRequests(userId: number, token: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/${userId}/requests`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+
+  // 🆕 🔹 ACEPTAR UNA SOLICITUD DE DINERO
+  acceptRequest(requestId: number, token: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/requests/${requestId}/accept`, {}, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+
+  // 🆕 🔹 RECHAZAR (ELIMINAR) UNA SOLICITUD DE DINERO
+  deleteRequest(requestId: number, token: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/requests/${requestId}/reject`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+
+  // 🔐 🔹 GENERAR HEADERS CON TOKEN
+  private getAuthHeaders(token: string): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+  }
 }

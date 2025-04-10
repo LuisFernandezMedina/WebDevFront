@@ -151,7 +151,7 @@
   
         <div class="tr-list-content">
           <div *ngFor="let req of requests" class="tr-list-row">
-            <div class="user-data">{{ req.requester }}</div>
+            <div class="user-data">{{ req.requesterName }}</div>
             <div class="user-data">${{ req.amount }}</div>
             <div class="user-actions" style="display: flex; gap: 10px;">
               <button class="action-btn send-btn" (click)="acceptRequest(req)">Accept</button>
@@ -166,4 +166,10 @@
       </ng-template>
     </div>
   </div>
+  <div *ngIf="modalVisible" class="modal">
+    <div class="modal-content">
+      <p>{{ modalMessage }}</p>
+    </div>
+  </div>
+  
   

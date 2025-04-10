@@ -11,7 +11,10 @@ import { UserService } from '../../services/user.service';
   templateUrl: './lista-usuarios.component.html',
   styleUrl: './lista-usuarios.component.css'
 })
+
+
 export class ListaUsuariosComponent implements OnInit{
+  
   isLoading: boolean = false;
   selectedUser: any = null;
   showBlockModal: boolean = false;
@@ -27,6 +30,9 @@ export class ListaUsuariosComponent implements OnInit{
   searchBy: 'name' | 'email' = 'name';
   selectedTab: 'find' | 'friends' | 'transactions' | 'requests' = 'find';
   userId: number = 0;
+  modalVisible: boolean = false;
+  modalMessage: string = '';
+
 
 
 
@@ -56,12 +62,15 @@ export class ListaUsuariosComponent implements OnInit{
     }, 1000);
   }
 
-
-
   
-  loadAllUsers(): void {
-    
+  showModal(message: string) {
+    this.modalMessage = message;
+    this.modalVisible = true;
+    setTimeout(() => {
+      this.modalVisible = false;
+    }, 2500);
   }
+  
   loadTransactions(): void {
     if (!this.token || !this.userId) return;
   
@@ -162,7 +171,10 @@ export class ListaUsuariosComponent implements OnInit{
     if (token && userIdStr) {
       this.token = token;
       this.userId = parseInt(userIdStr, 10);
-  
+      this.loadRequests();
+
+      
+      
       this.userService.getAllUsers(token).subscribe({
         next: (data) => {
           this.users = data;
@@ -188,28 +200,70 @@ export class ListaUsuariosComponent implements OnInit{
 
   selectTab(tab: 'find' | 'friends' | 'transactions' | 'requests') {
     this.selectedTab = tab;
+    if (tab === 'requests') {
+      this.loadRequests();
+    }
   }
   
   irABizum(tipo: 'send' | 'request', usuario: any) {
     this.router.navigate(['/bizum', tipo], { state: { usuario } });
   }
-  requests: { requester: string; amount: number }[] = [
-    { requester: 'John Doe', amount: 25.00 },
-    { requester: 'Alice Smith', amount: 40.50 },
-    { requester: 'Michael Johnson', amount: 10.75 }
-  ];
+  
+  requests: any[] = [];
+
   
 
-acceptRequest(request: any) {
-  console.log(`Accepted request from ${request.requester} for $${request.amount}`);
-  // Aquí podrías eliminar el request de la lista o marcarlo como aceptado
-}
+  acceptRequest(req: any) {
+    this.userService.acceptRequest(req.id, this.token).subscribe({
+      next: () => {
+        this.showModal('✅ Pago enviado correctamente');
+        this.requests = this.requests.filter(r => r.id !== req.id);
+      },
+      error: (err) => {
+        this.showModal('❌ Error: ' + (err.error?.error || 'No se pudo aceptar'));
+      }
+    });
+  }
+  
+  rejectRequest(req: any) {
+    this.userService.deleteRequest(req.id, this.token).subscribe({
+      next: () => {
+        this.showModal('🔕 Request rechazada');
+        this.requests = this.requests.filter(r => r.id !== req.id);
+      },
+      error: (err) => {
+        this.showModal('❌ Error: ' + (err.error?.error || 'No se pudo rechazar'));
+      }
+    });
+  }
 
-rejectRequest(request: any) {
-  console.log(`Rejected request from ${request.requester} for $${request.amount}`);
-  // Igual que arriba, actualizar estado o eliminar
-}
-
+  loadRequests() {
+    if (!this.token || !this.userId) return;
+  
+    this.userService.getAllUsers(this.token).subscribe({
+      next: (users) => {
+        const userMap = new Map(users.map((u: any) => [u.id, u.name])); // id → name
+  
+        this.userService.myRequests(this.userId, this.token).subscribe({
+          next: (res) => {
+            this.requests = [...res.sent_requests, ...res.received_requests].map((r: any) => ({
+              ...r,
+              requesterName: userMap.get(r.requester_id) || `User ${r.requester_id}`
+            }));
+          },
+          error: () => {
+            this.requests = [];
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error al obtener usuarios:', err);
+      }
+    });
+  }
+  
+  
+  
   
 
 
