@@ -212,15 +212,14 @@ export class ListaUsuariosComponent implements OnInit{
   requests: any[] = [];
 
   
-
   acceptRequest(req: any) {
     this.userService.acceptRequest(req.id, this.token).subscribe({
       next: () => {
-        this.showModal('✅ Pago enviado correctamente');
+        this.showModal('✅ Payment sent successfully');
         this.requests = this.requests.filter(r => r.id !== req.id);
       },
       error: (err) => {
-        this.showModal('❌ Error: ' + (err.error?.error || 'No se pudo aceptar'));
+        this.showModal('❌ Error: ' + (err.error?.error || 'Could not accept the request'));
       }
     });
   }
@@ -228,14 +227,15 @@ export class ListaUsuariosComponent implements OnInit{
   rejectRequest(req: any) {
     this.userService.deleteRequest(req.id, this.token).subscribe({
       next: () => {
-        this.showModal('🔕 Request rechazada');
+        this.showModal('🔕 Request rejected');
         this.requests = this.requests.filter(r => r.id !== req.id);
       },
       error: (err) => {
-        this.showModal('❌ Error: ' + (err.error?.error || 'No se pudo rechazar'));
+        this.showModal('❌ Error: ' + (err.error?.error || 'Could not reject the request'));
       }
     });
   }
+  
 
   loadRequests() {
     if (!this.token || !this.userId) return;

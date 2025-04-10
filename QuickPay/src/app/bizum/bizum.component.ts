@@ -82,9 +82,33 @@ export class BizumComponent implements OnInit {
     });
   }
   newRequest(): void {
-    // TODO: implement request logic
-    this.message = 'Request feature is not implemented yet';
-    this.error = true;
+    if (!this.amount || this.amount <= 0) {
+      this.message = 'Please enter a valid amount.';
+      this.error = true;
+      return;
+    }
+  
+    const token = sessionStorage.getItem('authToken');
+    const requesterId = Number(sessionStorage.getItem('userid'));
+    const recipientId = this.selectedUser?.id;
+  
+    if (!token || !recipientId) {
+      this.message = 'Missing information to create the request.';
+      this.error = true;
+      return;
+    }
+  
+    this.userService.newRequest(requesterId, recipientId, this.amount, token).subscribe({
+      next: () => {
+        this.message = '✅ Request sent successfully.';
+        this.error = false;
+      },
+      error: (err) => {
+        this.message = '❌ Error: ' + (err.error?.error || 'Could not send request');
+        this.error = true;
+      }
+    });
   }
+  
   
 }
