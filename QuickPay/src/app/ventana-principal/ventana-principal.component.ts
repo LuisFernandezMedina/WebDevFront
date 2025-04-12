@@ -28,6 +28,7 @@ export class VentanaPrincipalComponent implements OnInit {
   activeTab: string = 'tab1'; // Por defecto, la pestaña 1 está activa
   id: number = 0;
   localEmail: string = '';
+  balance: string = '0.00';
 
   loggedUser: any = {
     firstName: 'John',
@@ -86,6 +87,23 @@ export class VentanaPrincipalComponent implements OnInit {
     this.token = sessionStorage.getItem('token') || '';
     this.localEmail = sessionStorage.getItem('email') || '';
     //alert(sessionStorage.getItem('authToken'));
+  }
+  getUserInfo(email: string, token: string): void {
+    this.isLoading = true;
+    this.id = Number(sessionStorage.getItem('userid'));
+    this.userService.getUser(this.id,token).subscribe({
+      next: (response) => {
+        this.balance = response.balance || '0.00';
+        this.isLoading = false;
+        //alert(this.user.nombre)
+        
+      },
+      
+      error: (error) => {
+        console.error('Error al cargar el usuario:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
   private isAdminUser(): boolean {

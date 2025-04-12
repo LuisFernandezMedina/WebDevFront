@@ -28,10 +28,12 @@ export class ListaUsuariosComponent implements OnInit{
   filterBy: string = 'all';
   myemail: string = '';
   searchBy: 'name' | 'email' = 'name';
-  selectedTab: 'find' | 'friends' | 'transactions' | 'requests' = 'find';
+  selectedTab: 'find' | 'friends' | 'transactions' | 'requests' | 'frequent' = 'find';
   userId: number = 0;
   modalVisible: boolean = false;
   modalMessage: string = '';
+  frequentContacts: any[] = [];
+
 
 
 
@@ -91,12 +93,44 @@ export class ListaUsuariosComponent implements OnInit{
         }));
   
         this.transactions = [...sent, ...received].sort((a, b) => b.date.getTime() - a.date.getTime());
+  
+        const contactos: any[] = [];
+        const vistos = new Set();
+  
+        for (const tx of this.transactions) {
+          const contacto = tx.sender === 'You' ? tx.receiver : tx.sender;
+          console.log('🔎 Buscando contacto:', contacto);
+  
+          if (!vistos.has(contacto)) {
+            console.log('📋 Lista completa de usuarios disponibles:');
+this.users.forEach((user: any) => {
+  console.log(`🧑‍💼 Nombre: ${user.name}, Email: ${user.email}`);
+});
+
+            const match = this.users.find(u => u.name === contacto || u.email === contacto);
+            if (match) {
+              console.log('✅ Match encontrado:', match);
+              contactos.push(match);
+              vistos.add(contacto);
+            } else {
+              console.warn('❌ No se encontró usuario con ese nombre o email:', contacto);
+            }
+          }
+  
+          if (contactos.length >= 10) break;
+        }
+  
+        this.frequentContacts = contactos;
+        console.log('📋 Contactos frecuentes resultantes:', this.frequentContacts);
       },
+  
       error: (err) => {
         console.error('Error al obtener transacciones:', err);
       }
     });
   }
+  
+  
   
 
 
@@ -178,13 +212,14 @@ export class ListaUsuariosComponent implements OnInit{
       this.userService.getAllUsers(token).subscribe({
         next: (data) => {
           this.users = data;
+          this.loadTransactions(); // 👈 Llama aquí una vez tengas users reales
+
         },
         error: (err) => {
           console.error('Error al obtener usuarios:', err);
         }
       });
   
-      this.loadTransactions();
     } else {
       console.error('No token found in sessionStorage');
     }
@@ -198,7 +233,7 @@ export class ListaUsuariosComponent implements OnInit{
     );
   }
 
-  selectTab(tab: 'find' | 'friends' | 'transactions' | 'requests') {
+  selectTab(tab: 'find' | 'friends' | 'transactions' | 'requests'| 'frequent') {
     this.selectedTab = tab;
     if (tab === 'requests') {
       this.loadRequests();
@@ -268,3 +303,4 @@ export class ListaUsuariosComponent implements OnInit{
 
 
 }
+

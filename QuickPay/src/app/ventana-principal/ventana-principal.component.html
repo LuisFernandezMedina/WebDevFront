@@ -8,6 +8,8 @@
     </div>
     
     <!-- VENTANA PRINCIPAL-->
+    
+
     <div class = "ventana-principal">
         <div class="admin-controls2">
         <div class="logout-container">
@@ -55,10 +57,13 @@
         
         <!--VISTA DE USUARIO -->
         <div *ngIf="!isAdmin">
+      
             <div class = "ventana-box">
-                <!-- Vista para el usuario -->
+              
                 <h2>User View</h2>
+                
                 <app-lista-usuarios></app-lista-usuarios>
+                
                 
             </div>
             

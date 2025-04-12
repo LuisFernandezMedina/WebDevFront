@@ -4,6 +4,7 @@
   <button [class.active-tab]="selectedTab === 'find'" (click)="selectTab('find')">Find</button>
   <button [class.active-tab]="selectedTab === 'friends'" (click)="selectTab('friends')">Friends</button>
   <button [class.active-tab]="selectedTab === 'transactions'" (click)="selectTab('transactions')">My Transactions</button>
+  <button [class.active-tab]="selectedTab === 'frequent'" (click)="selectTab('frequent')">Frequent Contacts</button>
   <button [class.active-tab]="selectedTab === 'requests'" (click)="selectTab('requests')" style="position: relative;">
     Requests
     <span *ngIf="requests.length > 0" class="notification-dot"></span>
@@ -171,5 +172,32 @@
       <p>{{ modalMessage }}</p>
     </div>
   </div>
+  <div *ngIf="selectedTab === 'frequent'">
+    <div class="center-container">
+      <div class="user-list-container">
+        <div class="user-list-header">
+          <span class="column-header">Full Name</span>
+          <span class="column-header">Email</span>
+          <span class="column-header">Actions</span>
+        </div>
   
+        <div class="user-list-content">
+          <div *ngFor="let user of frequentContacts" class="user-list-row">
+            <div class="user-data">{{ user.name }}</div>
+            <div class="user-data">{{ user.email }}</div>
+  
+            <div class="user-actions">
+              <button class="action-btn request-btn" title="Request Money" (click)="irABizum('request', user)">
+                <i class="material-icons">request_quote</i>
+              </button>
+  
+              <button class="action-btn send-btn" title="Send Money" (click)="irABizum('send', user)">
+                <i class="material-icons">send</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
