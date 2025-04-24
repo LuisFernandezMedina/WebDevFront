@@ -1,0 +1,635 @@
+/* Contenedor del botón en la parte superior derecha */
+.admin-controls {
+    position: absolute;
+    top: 7.68vh; /* Equivalente a 70px */
+    right: 2.2vh; /* Equivalente a 20px */
+    z-index: 10;
+}
+
+
+.Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 6.04vh; /* Equivalente a 55px */
+    height: 6.04vh; /* Equivalente a 55px */
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 0.22vh 0.22vh 1.1vh rgba(0, 0, 0, 0.199); /* Equivalente a 2px 2px 10px */
+    background-color: rgb(65, 145, 255);
+}
+
+
+
+/* Signo más */
+.sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign svg {
+    width: 3.3vh; /* Equivalente a 30px */
+    height: 3.3vh; /* Equivalente a 30px */
+}
+
+.sign svg path {
+    fill: white;
+}
+  
+  /* Texto */
+  .text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 0.65em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+
+.Btn:hover {
+    width: 19.76vh; /* Equivalente a 180px */
+    border-radius: 4.39vh; /* Equivalente a 40px */
+    transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 0;
+}
+  
+  /* Efecto hover en el texto */
+.Btn:hover .text {
+    opacity: 1;
+    width: 70%; /* Equivalente a 70% del ancho total */
+    transition-duration: .3s;
+    padding-right: 1.1vh; /* Equivalente a 10px */
+    font-size: 0.9em;
+}
+
+/* Efecto de click en el botón */
+.Btn:active {
+    transform: translate(0.22vh, 0.22vh); /* Equivalente a 2px */
+}
+
+
+.admin-controls2 {
+    position: absolute;
+    top: 15%; /* Equivalente a 70px */
+    right: 2.2vh; /* Equivalente a 100px */
+    z-index: 10;
+}
+
+.search-filter-container {
+    background-color: #0e3d59;
+    border: 1px solid #1c3a4e;
+    color: #cde9ff;
+    padding: 1.1vh; /* 10px basado en 911px de altura */
+    border-radius: 0.2vw; /* 8px basado en 1963px de ancho */
+    width: 95%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3)	; /* 4px y 8px adaptados */
+    margin: 2vh auto; /* 10px basado en altura */
+    display: flex;
+    flex-direction: column;
+    margin-top: -5%; /* Reducido de 20px */
+    z-index: 10;
+
+
+}
+
+
+@media (max-width: 1360px) {
+    .user-list-container,
+    .search-filter-container {
+        min-width: 50.125rem; /* Mantiene el ancho mínimo de 450px */
+        max-width: 50.125rem; /* Evita que se encoja más allá de este ancho */
+        margin: 0; /* Elimina margen */
+        padding: 0; /* Elimina padding */
+        overflow-x: auto; /* Permite desplazamiento si es necesario */
+    }
+}
+
+
+.filter-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0rem;
+    z-index: 1;
+  }
+  .filter-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+  }
+  
+  .filter-center {
+    flex: 2;
+    display: flex;
+    justify-content: left;
+  }
+  #search-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #444;
+    color: white;
+  }
+
+.filter-options label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.filter-options select, .filter-options input {
+    padding: 0.5vh; /* 8px en base a la altura */
+    border-radius: 0.26vw; /* 5px en ancho */
+    gap: 0.4vw; /* 5px en ancho */
+    border: none;
+    background-color: #545c84;
+    color: white;
+}
+.filter-options input {
+    background-color: #676363;
+    color: white;
+    padding: 0.88vh; /* 8px basado en altura */
+    border-radius: 0.26vw; /* 5px en ancho */
+    border: none;
+    font-size: 1em;;
+}
+
+.filter-options input::placeholder {
+    color: #ccc;
+}
+
+
+
+/* Lista de usuarios */
+.user-list-container {
+    width:93.8%;
+    background-color: #10385a;
+    color: white;
+    padding: 2.2vh; /* Equivalente a 20px */
+    border-radius: 0.2vw; /* Equivalente a 12px */
+    box-shadow: 0 0.66vh 1.32vh rgba(0, 0, 0, 0.15); /* Equivalente a 6px y 12px */
+    max-height: 43vh; /* Ajusta esta altura según necesites para que no exceda la pantalla */
+    overflow-y: hidden;
+}
+
+
+/* Encabezado de la lista de usuarios */
+.user-list-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1.5vh 2vw; /* Padding vertical y horizontal más balanceado */
+    margin-bottom: 1.5%;
+    border-radius: 8px;
+    background-color: #1e2a38; /* Azul grisáceo profesional */
+    color: #ecf0f1; /* Blanco suave para contraste */
+    font-weight: 600;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estructura de la lista de usuarios en pantallas grandes */
+.user-list-header,
+.user-list-row {
+    display: grid;
+    /*grid-template-columns: 3vw 10vw 1fr 5.5vw 5.5vw 8.1vw; /* Configuración en pantallas grandes */
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.user-list-content {
+    max-height: 54.8vh; /* 500px en relación con 911px de altura */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #666 transparent;
+}
+
+
+.user-list-content::-webkit-scrollbar {
+    width: 0.41vw; /* 8px en relación con 1963px de ancho */
+}
+
+.user-list-content::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 0.51vw; /* 10px en relación con 1963px de ancho */
+}
+
+
+.user-list-row {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 0.5fr;
+
+    padding: 1.5vh 2vw;
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Gris muy claro tipo fondo neutro */
+    color: #2c3e50;
+    margin-bottom: 1vh;
+    align-items: center;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.user-list-row:hover {
+    background-color: #84fcd0; /* Azul clarito al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.user-list-row:hover .user-actions {
+    display: flex; /* Muestra las acciones al hacer hover */
+}
+
+.user-actions {
+    display: none;
+}
+
+
+.user-name-lastname {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25vw; /* 5px en relación con 1963px de ancho */
+    padding: 0.55vh; /* 5px en relación con 911px de altura */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    justify-content: flex-start;
+}
+
+.user-name, .user-lastname {
+    font-size: 1.76vh; /* 16px en relación con 911px de altura */
+    font-weight: 500;
+}
+.user-email {
+    font-size: 1.54vh; /* 14px en relación con 911px de altura */
+    color: #e0e0e0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+/* Estilo general para botones */
+.action-btn {
+    background: linear-gradient(145deg, #4e4e4e, #2a2a2a);
+    border: none;
+    color: #fff;
+    padding: 1.1vh 0;
+    font-size: 1.54vh;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), -3px -3px 6px rgba(70, 70, 70, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+
+
+
+
+
+.action-btn:hover {
+    box-shadow: 0.52vw 0.52vw 1.04vw rgba(0, 0, 0, 0.5), -0.52vw -0.52vw 1.04vw rgba(70, 70, 70, 0.3); /* 5px y 10px en relación con 1963px */
+    transform: translateY(-0.11vh); /* 1px basado en 911px */
+}
+.action-btn:active {
+    transform: translateY(0.22vh); /* 2px basado en 911px */
+    box-shadow: 0.1vw 0.1vw 0.31vw rgba(0, 0, 0, 0.4), -0.1vw -0.1vw 0.31vw rgba(70, 70, 70, 0.2); /* 1px y 3px en relación con 1963px */
+}
+
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    width: 100%;
+    
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0vw;
+    height: 100vh; /* <- Importante: usar toda la pantalla */
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(3px); /* <- Opcional: efecto blur */
+  }
+  .delete-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* <- Esto es lo que centra */
+    
+    background-color: #1e2a38;
+    padding: 4vh 3vh;
+    border-radius: 1.5vh;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 0.8vh 2vh rgba(0, 0, 0, 0.6);
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid #ff4d4d;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  
+.modal-overlay h3 {
+    color: #f1f1f1;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-shadow: 0.11vh 0.11vh 0.33vh rgba(0, 0, 0, 0.5);
+    word-wrap: breaak-word;
+    white-space: pre-wrap;
+}
+
+.modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background-color: #2a2a2a !important;
+    padding: 2.75vh !important;
+    border-radius: 1.65vh !important;
+    z-index: 2147483647 !important;
+    box-shadow: 0 0.88vh 1.76vh rgba(0, 0, 0, 0.4);
+    display: block !important;
+    opacity: 1 !important;
+    text-align: center; 
+    color: #f1f1f1;
+}
+/* Estilos para el modal de bloqueo */
+.block-modal {
+    background-color: #2a2a2a;
+    padding: 2.2vh;
+    border-radius: 1.65vh;
+    width: 15%;
+    height: 16%;
+    box-shadow: 0 0.88vh 1.76vh rgba(0, 0, 0, 0.4);
+    border: 0.22vh solid #444;
+    display: block;
+    opacity: 1;
+    text-align: center;
+    color: #ffffff;
+}
+
+.validate-modal {
+    background-color: #2a2a2a;
+    padding: 2.2vh;
+    border-radius: 1.65vh;
+    width: 15%;
+    box-shadow: 0 0.88vh 1.76vh rgba(0, 0, 0, 0.4); 
+    border: 0.22vh solid #444;
+    height: 16%;
+    display: block;
+    opacity: 1;
+    text-align: center;
+    color: #ffffff;
+}
+
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2.2vh; /* Equivalente a 20px */
+}
+
+
+
+.confirm-btn, .cancel-btn {
+    background-color: #d9534f;
+    color: white;
+    padding: 0.88vh 1.98vh; /* Equivalente a 8px y 18px */
+    border: none;
+    border-radius: 0.88vh; /* Equivalente a 8px */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.54vh; /* Equivalente a 14px */
+}
+
+
+.confirm-btn:hover {
+    background-color: #c9302c; /* Color más oscuro al hacer hover */
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268; /* Color más oscuro al hacer hover */
+}
+
+
+/* Texto de advertencia */
+.warning-text {
+    font-size: 1.43vh; /* Equivalente a 13px */
+    color: #f1c40f;
+    margin-top: 0.55vh; /* Equivalente a 5px */
+    margin-bottom: 2.75vh; /* Equivalente a 25px */
+    text-align: center;
+    font-weight: bold;
+}
+.edit-btn {
+    background: linear-gradient(145deg, #f19926, #f19926); /* Verde: Editar */
+    flex: 2;
+    border-top-left-radius: 0.41vw;
+    border-bottom-left-radius: 0.41vw;
+    color: white;
+  }
+  
+  .delete-btn {
+    background: linear-gradient(145deg, #ef5350, #d32f2f); /* Rojo: Eliminar */
+    flex: 2;
+    border-top-right-radius: 0.41vw;
+    border-bottom-right-radius: 0.41vw;
+    color: white;
+  }
+  /* Icono + texto */
+  .action-btn i {
+    margin-right: 0.4vw;
+    font-size: 2.2vh;
+    transition: transform 0.2s ease;
+  }
+  
+  .btn-label {
+    display: none;
+    font-size: 1.54vh;
+    font-weight: 500;
+  }
+  
+  .action-btn:hover .btn-label {
+    display: inline;
+  }
+  
+  .action-btn:hover i {
+    transform: scale(1.2);
+  }
+  .tab-selector {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 5%;
+    margin-bottom: -1vh;
+    position: relative;
+    top: -8vh; /* <- Esta línea es la clave: sube las tabs */
+    z-index: -1;
+  }
+  
+  
+  .tab-selector button {
+    background: linear-gradient(to top, #1a2e40, #0e3d59);
+    color: #fff;
+    border: 1px solid #0e3d59;
+    border-bottom: none;
+    padding: 1vh 2vw;
+    border-top-left-radius: 1.2vh;
+    border-top-right-radius: 1.2vh;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    margin-right: 0.5vw;
+  }
+  
+  .tab-selector button:hover {
+    background: #6eca89;
+  }
+  
+  .tab-selector .active-tab {
+    background: linear-gradient(to top, #f4d35e, #f0c419);
+    color: #333;
+    border-color: #d1a000;
+    font-weight: 700;
+    box-shadow: none;
+    z-index: 5;
+  }
+
+  .tr-list-container {
+    width: 88.5%;
+    background-color: #10385a;
+    color: white;
+    padding: 2.2vh;
+    border-radius: 0.2vw;
+    box-shadow: 0 0.66vh 1.32vh rgba(0, 0, 0, 0.15);
+    max-height: 45vh;
+    overflow-y: hidden;
+
+    /* 👇 Añade estas líneas para centrarla */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -5%; /* Reducido de 20px */
+
+}
+
+
+.tr-list-header {
+    display: grid;
+    padding: 1.5vh 2vw; /* Padding vertical y horizontal más balanceado */
+    margin-bottom: 1.5%;
+    border-radius: 8px;
+    background-color: #1e2a38; /* Azul grisáceo profesional */
+    color: #ecf0f1; /* Blanco suave para contraste */
+    font-weight: 600;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+/* Estructura de la lista de usuarios en pantallas grandes */
+.tr-list-header,
+.tr-list-row {
+    display: grid;
+    /*grid-template-columns: 3vw 10vw 1fr 5.5vw 5.5vw 8.1vw; /* Configuración en pantallas grandes */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.tr-list-content {
+    max-height: 54.88vh; /* 500px en relación con 911px de altura */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #666 transparent;
+}
+.tr-list-row {
+        display: grid;
+      
+    
+        padding: 1.5vh 2vw;
+        border-radius: 8px;
+        background-color: #f8f9fa; /* Gris muy claro tipo fondo neutro */
+        color: #2c3e50;
+        margin-bottom: 1vh;
+        align-items: center;
+        text-align: left;
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease-in-out;
+    
+}
+.tr-list-row:hover {
+    background-color: #84fcd0; /* Azul clarito al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;}
+
+
+.material-icons {
+    color: white;
+    font-size: 1.6em;
+}
+.notification-dot {
+    position: absolute;
+    top: 0.3vh;
+    right: 0.4vw;
+    width: 1.2vh;
+    height: 1.2vh;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  }
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0e2a44;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -60%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
+  }
+  

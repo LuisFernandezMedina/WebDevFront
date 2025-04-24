@@ -5,19 +5,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
+import { ListaAdminsComponent } from "../shared/lista-admins/lista-admins.component";
 import { ListaUsuariosComponent } from '../shared/lista-usuarios/lista-usuarios.component';
 
 
 @Component({
   selector: 'app-ventana-principal',
   standalone: true,
-  imports: [CommonModule, FormsModule, FooterComponent, HeaderComponent, ListaUsuariosComponent ],
+  imports: [CommonModule, FormsModule, FooterComponent, HeaderComponent, ListaUsuariosComponent, ListaAdminsComponent],
   templateUrl: './ventana-principal.component.html',
   styleUrls: ['./ventana-principal.component.css']
 })
 export class VentanaPrincipalComponent implements OnInit {
   titulo: string = 'Bienvenido a la Ventana Principal';
-  isAdmin: boolean = false;
+  isAdmin: boolean | null = null;
   token: string = '';
   myemail: string = '';
   isLoading: boolean = false;
@@ -43,39 +44,6 @@ export class VentanaPrincipalComponent implements OnInit {
     balance: '9999.00'
   };
 
-  /*ESTO QUIZAS HAYA Q QUITARLO */
-  users = [
-    {
-      id: '1',
-      firstName: 'Aaron',
-      lastName: 'Smith',
-      email: 'aaron.smith@example.com',
-      isAdmin: true,
-      profilePicture: 'assets/images/test-perfil1.jpg',
-      estado: 'Validado'
-    },
-    {
-      firstName: 'Maria',
-      lastName: 'González Diaz del Campo Blanco de Castilla',
-      email: 'maria.gonzalez@example.com',
-      isAdmin: false,
-      profilePicture: 'assets/images/test-perfil2.jpg',
-      estado: 'No validado'
-    },
-    {
-      firstName: 'Maria',
-      lastName: 'González',
-      email: 'maria.gonzalez@example.com',
-      department: 'Tecnología',
-      center: 'Centro Sur',
-      joiningDate: '15/08/2021',
-      jobTitle: 'Desarrolladora',
-      isAdmin: false,
-      profilePicture: 'assets/images/test-perfil2.jpg',
-      estado: 'No validado'
-    },
-  
-  ];
   
   constructor(
     private router: Router,
@@ -84,9 +52,11 @@ export class VentanaPrincipalComponent implements OnInit {
   ) {}
   
   ngOnInit(): void {
-    this.token = sessionStorage.getItem('token') || '';
+    this.token = sessionStorage.getItem('authToken') || '';
     this.localEmail = sessionStorage.getItem('email') || '';
-    //alert(sessionStorage.getItem('authToken'));
+    this.isAdmin = this.isAdminUser();
+    console.log("¿Es admin?", this.isAdmin);
+        //alert(sessionStorage.getItem('authToken'));
   }
   getUserInfo(email: string, token: string): void {
     this.isLoading = true;
@@ -105,21 +75,22 @@ export class VentanaPrincipalComponent implements OnInit {
       }
     });
   }
-
   private isAdminUser(): boolean {
     const token = this.token;
     if (!token) {
       return false;
     }
+  
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      // Verifica tanto "ROLE_ADMIN" como "ADMIN"
-      return payload.role === 'ROLE_ADMIN' || payload.role === 'ADMIN';
+      console.log('Payload:', payload); // Útil para depurar
+      return payload.role === 1; // ✅ Aquí la corrección
     } catch (error) {
       console.error('Error al decodificar el token:', error);
       return false;
     }
   }
+  
   logout(): void {
     sessionStorage.clear();
     this.router.navigate(['/login']); 

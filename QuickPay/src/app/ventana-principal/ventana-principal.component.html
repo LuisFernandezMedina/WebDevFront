@@ -72,21 +72,16 @@
         
         <!--VISTA DE ADMINISTRADOR -->
         <div *ngIf="isAdmin">
-            <div *ngIf="activeTab === 'tab1'" class="tab-content">
-            <app-lista-usuarios></app-lista-usuarios>
-            </div>
-            <div *ngIf="activeTab === 'tab2'" class="tab-content">
-            </div>
-            <div *ngIf="activeTab === 'tab3'" class="tab-content"> 
+          <div class = "ventana-box">
+              
+            <h2>Admin View</h2>
+            
+            <app-lista-admins></app-lista-admins>
+            
+            
         </div>
-    </div>
+</div>
     
-    <!-- Contenedor para las pestañas, posicionado junto al cuadro negro -->
-    <div *ngIf="isAdmin" class="tabs-container">
-        <button (click)="selectTab('tab1')" [class.active]="activeTab === 'tab1'">Usuarios</button>
-        <button (click)="selectTab('tab2')" [class.active]="activeTab === 'tab2'">Ausencias</button>
-        <button (click)="selectTab('tab3')" [class.active]="activeTab === 'tab3'">Turnos Horarios</button>
-    </div>
     
 
 </div>

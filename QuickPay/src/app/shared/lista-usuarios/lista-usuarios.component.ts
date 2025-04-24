@@ -146,56 +146,6 @@ this.users.forEach((user: any) => {
       name: 'Aaron Smith',
       email: 'aaron.smith@example.com',
       balance: 100.00
-    },
-    {
-      name: 'Maria González Diaz del Campo Blanco de Castilla',
-      email: 'maria.gonzalez@example.com',
-      balance: 50.50
-    },
-    {
-      name: 'Maria González',
-      email: 'maria2.gonzalez@example.com',
-      balance: 75.25
-    },
-    {
-      name: 'Maria González Diaz del Campo Blanco de Castilla',
-      email: 'maria.gonzalez@example.com',
-      balance: 50.50
-    },
-    {
-      name: 'Maria González',
-      email: 'maria2.gonzalez@example.com',
-      balance: 75.25
-    },
-    {
-      name: 'Maria González Diaz del Campo Blanco de Castilla',
-      email: 'maria.gonzalez@example.com',
-      balance: 50.50
-    },
-    {
-      name: 'Maria González',
-      email: 'maria2.gonzalez@example.com',
-      balance: 75.25
-    },
-    {
-      name: 'Maria González Diaz del Campo Blanco de Castilla',
-      email: 'maria.gonzalez@example.com',
-      balance: 50.50
-    },
-    {
-      name: 'Maria González',
-      email: 'maria2.gonzalez@example.com',
-      balance: 75.25
-    },
-    {
-      name: 'Maria González Diaz del Campo Blanco de Castilla',
-      email: 'maria.gonzalez@example.com',
-      balance: 50.50
-    },
-    {
-      name: 'Maria González',
-      email: 'maria2.gonzalez@example.com',
-      balance: 75.25
     }
   ];
 

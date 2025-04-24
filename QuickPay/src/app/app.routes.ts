@@ -7,6 +7,7 @@ import { ReducirBalanceComponent } from './reducir-balance/reducir-balance.compo
 import { RegistroComponent } from './registro/registro.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { ListaAdminsComponent } from './shared/lista-admins/lista-admins.component';
 import { VentanaPrincipalComponent } from './ventana-principal/ventana-principal.component';
 
 export const routes: Routes = [
@@ -20,5 +21,6 @@ export const routes: Routes = [
   { path: 'anadir-balance', component: AnadirBalanceComponent },
   { path: 'reducir-balance', component: ReducirBalanceComponent },
   { path: 'bizum/:tipo', component: BizumComponent },
+  { path: 'lista-admins', component: ListaAdminsComponent },
 
 ];
