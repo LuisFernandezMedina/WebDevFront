@@ -126,4 +126,33 @@ export class UserService {
       Authorization: `Bearer ${token}`,
     });
   }
+
+    // 🛠️ ADMIN: MODIFICAR USUARIO
+    updateUserAsAdmin(userId: number, updatedData: any, token: string): Observable<any> {
+      return this.http.patch(`${this.apiUrl}/admin/users/${userId}`, updatedData, {
+        headers: this.getAuthHeaders(token),
+      });
+    }
+  
+    // 🗑️ ADMIN: ELIMINAR USUARIO
+    deleteUserAsAdmin(userId: number, token: string): Observable<any> {
+      return this.http.delete(`${this.apiUrl}/admin/users/${userId}`, {
+        headers: this.getAuthHeaders(token),
+      });
+    }
+  
+    // 💰 ADMIN: MODIFICAR BALANCE DE USUARIO
+    updateUserBalanceAsAdmin(userId: number, balance: number, token: string): Observable<any> {
+      return this.http.patch(`${this.apiUrl}/admin/users/${userId}/modify_balance`, { balance }, {
+        headers: this.getAuthHeaders(token),
+      });
+    }
+  
+    // 🔁 ADMIN: CANCELAR TRANSACCIÓN
+    cancelTransactionAsAdmin(transactionId: number, token: string): Observable<any> {
+      return this.http.delete(`${this.apiUrl}/admin/transactions/${transactionId}`, {
+        headers: this.getAuthHeaders(token),
+      });
+    }
+  
 }

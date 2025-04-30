@@ -18,6 +18,7 @@ export const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'ventana-principal', component: VentanaPrincipalComponent },
   { path: 'perfil-usuario', component: PerfilUsuarioComponent },
+  { path: 'perfil-usuario/:id', component: PerfilUsuarioComponent },
   { path: 'anadir-balance', component: AnadirBalanceComponent },
   { path: 'reducir-balance', component: ReducirBalanceComponent },
   { path: 'bizum/:tipo', component: BizumComponent },

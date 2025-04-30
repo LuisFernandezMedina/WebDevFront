@@ -23,9 +23,11 @@
     </div>
 
     <div class="info-field">
-      <label>Actual account balance</label>
-      <p>{{ user.balance }} €</p>
+      <label>Account Balance</label>
+      <p *ngIf="!isEditing">{{ user.balance }} €</p>
+      <input *ngIf="isEditing" type="number" [(ngModel)]="user.balance" min="0" />
     </div>
+    
 
     <!-- Botones de acción -->
     <div class="actions">

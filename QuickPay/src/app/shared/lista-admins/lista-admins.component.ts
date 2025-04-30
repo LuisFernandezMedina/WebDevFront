@@ -68,11 +68,13 @@ export class ListaAdminsComponent {
   }
   users = [
     {
+      id: 1,
       name: 'Aaron Smith',
       email: 'aaron.smith@example.com',
       balance: 100.00
     }
   ];
+  
   
   selectTab(tab: 'find' | 'friends' | 'transactions' | 'requests'| 'frequent') {
     this.selectedTab = tab;
@@ -115,6 +117,33 @@ export class ListaAdminsComponent {
     this.modalMessage = "Are you sure you want to delete this user? This action cannot be undone.";
     this.showDeleteModal = true;
   }
+
+  
+  confirmDelete(): void {
+    if (this.selectedUser) {
+      this.userService.deleteUserAsAdmin(this.selectedUser.id, this.token).subscribe({
+        next: () => {
+          this.showDeleteModal = false;
+          this.selectedUser = null;
+          this.loadUsers(); // 🔄 Recarga la lista tras borrar
+        },
+        error: (err) => {
+          console.error('Error deleting user:', err);
+          this.showDeleteModal = false;
+        }
+      });
+    }
+  }
+  loadUsers(): void {
+    this.userService.getAllUsers(this.token).subscribe((users) => {
+      this.users = users;
+      this.loadTransactions()
+    });
+  }
+  editUser(userId: number): void {
+    this.router.navigate(['/perfil-usuario', userId]);
+  }
+  
 
 
 }
