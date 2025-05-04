@@ -3,7 +3,6 @@ import { AnadirBalanceComponent } from './anadir-balance/anadir-balance.componen
 import { BizumComponent } from './bizum/bizum.component';
 import { LoginComponent } from './login/login.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
-import { ReducirBalanceComponent } from './reducir-balance/reducir-balance.component';
 import { RegistroComponent } from './registro/registro.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -20,7 +19,6 @@ export const routes: Routes = [
   { path: 'perfil-usuario', component: PerfilUsuarioComponent },
   { path: 'perfil-usuario/:id', component: PerfilUsuarioComponent },
   { path: 'anadir-balance', component: AnadirBalanceComponent },
-  { path: 'reducir-balance', component: ReducirBalanceComponent },
   { path: 'bizum/:tipo', component: BizumComponent },
   { path: 'lista-admins', component: ListaAdminsComponent },
 

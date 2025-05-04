@@ -55,12 +55,6 @@ export class UserService {
     });
   }
 
-  // 🔹 RETIRAR SALDO
-  retireBalance(userId: number, amount: number, token: string): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/users/${userId}/retire_balance`, { amount }, {
-      headers: this.getAuthHeaders(token)
-    });
-  }
 
   // 🔹 OBTENER TODOS LOS USUARIOS
   getAllUsers(token: string): Observable<any> {
