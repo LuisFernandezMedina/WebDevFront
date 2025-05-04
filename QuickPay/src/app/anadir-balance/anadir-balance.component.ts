@@ -18,7 +18,7 @@ import { HeaderComponent } from '../shared/header/header.component';
 
 export class AnadirBalanceComponent implements OnInit {
   user: any = { balance: 0 };
-  direction: 'in' | 'out' = 'out';
+  direction: 'in' | 'out' = 'in';
   card_number: string = '';
   cardholder_name: string = '';
   expiration_date: string = '';
