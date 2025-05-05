@@ -665,7 +665,6 @@
   .ventana-box {
     width: 80%;
     height: 55%;
-    padding: 2.5rem; /* 40px */
     position: absolute;
     top: 57%;
     left: 50%;
@@ -673,7 +672,13 @@
     text-align: center;
     margin-bottom: 1.25rem;
     border-radius: 0.3125rem;
-
+   
+        max-width: 100%;
+        overflow-x: auto;
+        box-sizing: border-box;
+        padding: 2.5rem 1rem;
+    
+      
 
 
 

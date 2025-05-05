@@ -105,16 +105,29 @@
 
 
 }
-
+@media (max-width: 768px) {
+    .user-list-header,
+    .user-list-row {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .user-actions {
+      justify-content: center;
+      margin-top: 1vh;
+    }
+  }
+  
 
 @media (max-width: 1360px) {
     .user-list-container,
     .search-filter-container {
-        min-width: 50.125rem; /* Mantiene el ancho mínimo de 450px */
-        max-width: 50.125rem; /* Evita que se encoja más allá de este ancho */
-        margin: 0; /* Elimina margen */
-        padding: 0; /* Elimina padding */
-        overflow-x: auto; /* Permite desplazamiento si es necesario */
+        width: 100%;
+        max-width: 95vw;
+        margin: 0 auto;
+        padding: 1rem;
+        overflow-x: auto;
+        box-sizing: border-box;
     }
 }
 
