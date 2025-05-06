@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { AnadirBalanceComponent } from './anadir-balance/anadir-balance.component';
 import { BizumComponent } from './bizum/bizum.component';
+import { ContrasenaOlvidadaComponent } from './contrasena-olvidada/contrasena-olvidada.component';
 import { LoginComponent } from './login/login.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { RegistroComponent } from './registro/registro.component';
+import { ResetContrasenaComponent } from './reset-contrasena/reset-contrasena.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ListaAdminsComponent } from './shared/lista-admins/lista-admins.component';
@@ -21,5 +23,8 @@ export const routes: Routes = [
   { path: 'anadir-balance', component: AnadirBalanceComponent },
   { path: 'bizum/:tipo', component: BizumComponent },
   { path: 'lista-admins', component: ListaAdminsComponent },
+  { path: 'contrasena-olvidada', component: ContrasenaOlvidadaComponent },
+  { path: 'reset-password', component: ResetContrasenaComponent },
+
 
 ];

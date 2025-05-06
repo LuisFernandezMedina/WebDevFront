@@ -148,5 +148,23 @@ export class UserService {
         headers: this.getAuthHeaders(token),
       });
     }
+    resetPasswordLink(email: string): Observable<any> {
+      return this.http.post(`${this.apiUrl}/password_resets`, { email });
+    }
+    
+    resetPassword(token: string, password: string, password_confirmation: string): Observable<any> {
+      return this.http.patch(`${this.apiUrl}/password_resets`, {
+        token,
+        password,
+        password_confirmation
+      });
+    }
+    validateToken(token: string) {
+      return this.http.get(`${this.apiUrl}/password_resets/validate`, {
+        params: { token },
+      });
+    }
+    
+    
   
 }

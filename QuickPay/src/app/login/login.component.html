@@ -37,7 +37,7 @@
                 </span>
             </div>
             <div class="forgot-password-container">
-                <a href="javascript:void(0)"  class="forgot-password">Forgot password?</a>
+                <a href="javascript:void(0)" (click)="goToForgotPassword()" class="forgot-password">Forgot password?</a>
             </div>
             <div class="login-failed-container">
                 <div *ngIf="loginFailed" class="login-failed-message">

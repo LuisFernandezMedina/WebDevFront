@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { UserService } from '../services/user.service';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { HeaderComponent } from '../shared/header/header.component';
-import { jwtDecode } from 'jwt-decode'
 
 @Component({
   selector: 'app-login',
@@ -176,6 +176,9 @@ export class LoginComponent {
     this.emailInvalid = false;
     this.domainInvalid = false;
     this.errorMessage = '';
+  }
+  goToForgotPassword(): void {
+    this.router.navigate(['/contrasena-olvidada']);
   }
 
 

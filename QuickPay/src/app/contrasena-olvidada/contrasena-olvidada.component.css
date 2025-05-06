@@ -1,0 +1,145 @@
+/* Contenedor principal */
+.login-container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: 
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* Capa negra con opacidad */
+    url('/assets/images/background2.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 5rem;
+    overflow-y: auto;
+}
+.reset-message {
+    color: rgb(255, 255, 255); /* Texto blanco */
+    font-size: 1rem;
+    position: absolute; /* Mantén el mensaje en una posición fija respecto a su contenedor */
+    text-align: center;
+    top: -40px; /* Ajusta la distancia vertical para estar más arriba */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Ajuste para el centrado perfecto */
+}
+
+  
+/* Caja del formulario */
+.login-box {
+    width: 90%;
+    max-width: 28.125rem; /* 450px */
+    min-width: 28.125rem;
+    padding: 2.5rem; /* 40px */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #106a89;
+    box-shadow: 0 0.9375rem 1.5625rem rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-bottom: 1.25rem;
+    border-radius: 0.3125rem;
+}
+
+.login-box h2 {
+    margin: 0 0 20px;
+    color: #ffffff;
+}
+
+/* Texto explicativo */
+.recovery-text {
+    color: #cccccc;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 25px;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+/* Campo de texto */
+.textbox {
+    position: relative;
+    margin-bottom: 25px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.textbox label {
+    position: absolute;
+    top: 65%;
+    left: 10px;
+    transform: translateY(-80%);
+    font-size: 16px;
+    color: #f5f5f5;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.textbox input {
+    width: 95%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #f5f5f5;
+    font-size: 16px;
+}
+
+.textbox input:focus ~ label,
+.textbox input:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 12px;
+    color: #00eeff;
+}
+
+.textbox input:focus {
+    border-bottom: 2px solid #00eeff;
+    box-shadow: 0 0 8px #00eeff;
+}
+
+.textbox input::placeholder {
+    color: transparent;
+}
+
+/* Botón */
+.btn {
+    width: 102%;
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Botón para volver */
+.back-button-container {
+    position: fixed;
+    bottom: 6%;
+    left: 20px;
+}
+
+.back-button {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
