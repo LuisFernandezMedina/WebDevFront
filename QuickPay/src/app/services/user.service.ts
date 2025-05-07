@@ -121,50 +121,69 @@ export class UserService {
     });
   }
 
-    // 🛠️ ADMIN: MODIFICAR USUARIO
-    updateUserAsAdmin(userId: number, updatedData: any, token: string): Observable<any> {
-      return this.http.patch(`${this.apiUrl}/admin/users/${userId}`, updatedData, {
-        headers: this.getAuthHeaders(token),
-      });
-    }
+  // 🛠️ ADMIN: MODIFICAR USUARIO
+  updateUserAsAdmin(userId: number, updatedData: any, token: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/admin/users/${userId}`, updatedData, {
+      headers: this.getAuthHeaders(token),
+    });
+  }
+
+  // 🗑️ ADMIN: ELIMINAR USUARIO
+  deleteUserAsAdmin(userId: number, token: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/admin/users/${userId}`, {
+      headers: this.getAuthHeaders(token),
+    });
+  }
+
+  // 💰 ADMIN: MODIFICAR BALANCE DE USUARIO
+  updateUserBalanceAsAdmin(userId: number, balance: number, token: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/admin/users/${userId}/modify_balance`, { balance }, {
+      headers: this.getAuthHeaders(token),
+    });
+  }
+
+  // 🔁 ADMIN: CANCELAR TRANSACCIÓN
+  cancelTransactionAsAdmin(transactionId: number, token: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/admin/transactions/${transactionId}`, {
+      headers: this.getAuthHeaders(token),
+    });
+  }
+  resetPasswordLink(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/password_resets`, { email });
+  }
   
-    // 🗑️ ADMIN: ELIMINAR USUARIO
-    deleteUserAsAdmin(userId: number, token: string): Observable<any> {
-      return this.http.delete(`${this.apiUrl}/admin/users/${userId}`, {
-        headers: this.getAuthHeaders(token),
-      });
-    }
-  
-    // 💰 ADMIN: MODIFICAR BALANCE DE USUARIO
-    updateUserBalanceAsAdmin(userId: number, balance: number, token: string): Observable<any> {
-      return this.http.patch(`${this.apiUrl}/admin/users/${userId}/modify_balance`, { balance }, {
-        headers: this.getAuthHeaders(token),
-      });
-    }
-  
-    // 🔁 ADMIN: CANCELAR TRANSACCIÓN
-    cancelTransactionAsAdmin(transactionId: number, token: string): Observable<any> {
-      return this.http.delete(`${this.apiUrl}/admin/transactions/${transactionId}`, {
-        headers: this.getAuthHeaders(token),
-      });
-    }
-    resetPasswordLink(email: string): Observable<any> {
-      return this.http.post(`${this.apiUrl}/password_resets`, { email });
-    }
+  resetPassword(token: string, password: string, password_confirmation: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/password_resets`, {
+      token,
+      password,
+      password_confirmation
+    });
+  }
+  validateToken(token: string) {
+    return this.http.get(`${this.apiUrl}/password_resets/validate`, {
+      params: { token },
+    });
+  }
     
-    resetPassword(token: string, password: string, password_confirmation: string): Observable<any> {
-      return this.http.patch(`${this.apiUrl}/password_resets`, {
-        token,
-        password,
-        password_confirmation
-      });
-    }
-    validateToken(token: string) {
-      return this.http.get(`${this.apiUrl}/password_resets/validate`, {
-        params: { token },
-      });
-    }
-    
-    
+  // 🔗 SEGUIR A UN USUARIO
+  followUser(myId: number, friendId: number, token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/${myId}/follow?friend_id=${friendId}`, null, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+
+  // ❌ DEJAR DE SEGUIR A UN USUARIO
+  unfollowUser(myId: number, friendId: number, token: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/users/${myId}/unfollow?friend_id=${friendId}`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+
+  // 👥 OBTENER LISTA DE AMIGOS
+  getFriends(myId: number, token: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/users/${myId}/friends`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
   
 }

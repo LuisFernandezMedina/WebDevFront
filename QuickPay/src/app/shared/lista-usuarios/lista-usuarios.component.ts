@@ -4,6 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
+interface Usuario {
+  id: number;
+  name: string;
+  email: string;
+  balance?: number;
+}
+
 @Component({
   selector: 'app-lista-usuarios',
   standalone: true,
@@ -11,7 +18,6 @@ import { UserService } from '../../services/user.service';
   templateUrl: './lista-usuarios.component.html',
   styleUrl: './lista-usuarios.component.css'
 })
-
 
 export class ListaUsuariosComponent implements OnInit{
   
@@ -33,12 +39,10 @@ export class ListaUsuariosComponent implements OnInit{
   modalVisible: boolean = false;
   modalMessage: string = '';
   frequentContacts: any[] = [];
-
-
-
-
-
+  user: Usuario[] = [];
+  friends: Usuario[] = [];
   
+
   loggedUser: any = {
     firstName: 'John',
     lastName: 'Doe',
@@ -46,15 +50,11 @@ export class ListaUsuariosComponent implements OnInit{
     role: 'admin'
   };
 
-
   constructor(
     private router: Router,
     private userService: UserService,
     private route: ActivatedRoute
   ) {}
-
-
-
 
   navigateTo(route: string): void {
     this.isLoading = true;
@@ -64,7 +64,6 @@ export class ListaUsuariosComponent implements OnInit{
     }, 1000);
   }
 
-  
   showModal(message: string) {
     this.modalMessage = message;
     this.modalVisible = true;
@@ -130,10 +129,6 @@ this.users.forEach((user: any) => {
     });
   }
   
-  
-  
-
-
   transactions = [
     { sender: 'Alice Johnson', receiver: 'Bob Smith', amount: 75.00, date: new Date('2024-04-01') },
     { sender: 'Carlos Diaz', receiver: 'Eva Adams', amount: 120.50, date: new Date('2024-04-02') },
@@ -143,6 +138,7 @@ this.users.forEach((user: any) => {
   
   users = [
     {
+      id: 1,
       name: 'Aaron Smith',
       email: 'aaron.smith@example.com',
       balance: 100.00
@@ -151,30 +147,39 @@ this.users.forEach((user: any) => {
 
   ngOnInit(): void {
     const token = sessionStorage.getItem('authToken');
-    const userIdStr = sessionStorage.getItem('userid'); 
+    const userIdStr = sessionStorage.getItem('userid');
+  
     if (token && userIdStr) {
       this.token = token;
       this.userId = parseInt(userIdStr, 10);
+  
       this.loadRequests();
-
-      
-      
+  
+      // Primero obtenemos todos los usuarios
       this.userService.getAllUsers(token).subscribe({
-        next: (data) => {
-          this.users = data;
-          this.loadTransactions(); // 👈 Llama aquí una vez tengas users reales
-
+        next: (users) => {
+          this.users = users;
+  
+          // Luego usamos esos usuarios para mapear los IDs de amigos a objetos completos
+          this.userService.getFriends(this.userId, token).subscribe({
+            next: (friendList) => {
+              console.log('📩 Amigos recibidos (objetos):', friendList);
+              this.friends = friendList;
+            },
+            error: (err) => console.error('Error al obtener amigos:', err)
+          });
+          
+  
+          this.loadTransactions(); // ya con users disponibles
         },
-        error: (err) => {
-          console.error('Error al obtener usuarios:', err);
-        }
+        error: (err) => console.error('Error al obtener usuarios:', err)
       });
   
     } else {
       console.error('No token found in sessionStorage');
     }
-    
-  }
+  }  
+
   get filteredUsers() {
     return this.users.filter(user =>
       String(user[this.searchBy as keyof typeof user])
@@ -196,7 +201,6 @@ this.users.forEach((user: any) => {
   
   requests: any[] = [];
 
-  
   acceptRequest(req: any) {
     this.userService.acceptRequest(req.id, this.token).subscribe({
       next: () => {
@@ -221,7 +225,6 @@ this.users.forEach((user: any) => {
     });
   }
   
-
   loadRequests() {
     if (!this.token || !this.userId) return;
   
@@ -246,11 +249,41 @@ this.users.forEach((user: any) => {
       }
     });
   }
-  
-  
-  
-  
 
+  get filteredFriends(): Usuario[] {
+    return this.friends.filter(friend =>
+      String(friend[this.searchBy])
+        .toLowerCase()
+        .includes(this.searchQuery.toLowerCase())
+    );
+  }     
+
+  isFriend(userId: number): boolean {
+    return this.friends.some(friend => friend.id === userId);
+  }
+
+  follow(user: Usuario): void {
+    this.userService.followUser(this.userId, user.id, this.token).subscribe({
+      next: () => {
+        this.friends.push(user); // 👈 Añade el objeto, no solo el id
+        this.showModal(`✅ Siguiendo a ${user.name}`);
+      },
+      error: (err) => {
+        this.showModal(`❌ Error: ${err.error?.error || 'No se pudo seguir'}`);
+      }
+    });
+  }
+  
+  unfollow(user: Usuario): void {
+    this.userService.unfollowUser(this.userId, user.id, this.token).subscribe({
+      next: () => {
+        this.friends = this.friends.filter(f => f.id !== user.id); // 👈 Filtra por id
+        this.showModal(`👋 Dejaste de seguir a ${user.name}`);
+      },
+      error: (err) => {
+        this.showModal(`❌ Error: ${err.error?.error || 'No se pudo dejar de seguir'}`);
+      }
+    });
+  }  
 
 }
-
