@@ -5,8 +5,17 @@
         <div class="form-container">
             <h2>Add Balance from your bank account</h2>
             
-            <form>
-                
+            <div class="input-group">
+                <label for="saved_card">Use a saved card</label>
+                <select id="saved_card" [(ngModel)]="selectedCardId" (change)="onSelectCard(selectedCardId)">
+                    <option value="">-- Select a saved card --</option>
+                    <option *ngFor="let card of savedCards" [value]="card.id">
+                    {{ card.card_number | slice:-4 }} - {{ card.cardholder_name }}
+                    </option>
+                </select>
+            </div>    
+
+            <form>              
 
                 <div class="input-group">
                     <label for="cardholder_name">Cardholder Name</label>
@@ -36,6 +45,13 @@
                     <input type="number" id="amount" [(ngModel)]="amount" name="amount" required>
                 </div>
 
+                <div *ngIf="shouldShowSaveOption()" class="input-group">
+                    <label>
+                      <input type="checkbox" [(ngModel)]="showSaveOption" name="save_card" />
+                      Save this card for future use
+                    </label>
+                </div>                  
+                  
                 <button class="btn" type="button" (click)="addBalance()" [disabled]="isLoading">
                     {{ isLoading ? 'Processing...' : 'Submit Payment' }}
                 </button>

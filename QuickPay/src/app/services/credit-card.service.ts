@@ -21,7 +21,7 @@ export interface CreditCardTransferResponse {
   providedIn: 'root'
 })
 export class CreditCardService {
-  private apiUrl = 'http://localhost:3000/payment_cards';
+  private apiUrl = 'http://localhost:4000/payment_cards';
 
   constructor(private http: HttpClient) {}
 
@@ -48,4 +48,15 @@ export class CreditCardService {
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  getUserCards(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:4000/users/${userId}/payment_cards`);
+  }
+  
+  createCardForUser(userId: number, cardData: any): Observable<any> {
+    return this.http.post(`http://localhost:4000/users/${userId}/payment_cards`, {
+      payment_card: cardData
+    });
+  }
+  
 }
