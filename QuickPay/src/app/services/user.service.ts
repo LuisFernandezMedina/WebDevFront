@@ -185,5 +185,35 @@ export class UserService {
       headers: this.getAuthHeaders(token)
     });
   }
+  createGroupRequest(payload: {
+    total_amount: number;
+    description: string;
+    participants: { id: number; amount: number }[];
+  }, token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/group_requests`, payload, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+  acceptGroupRequest(groupRequestId: number, token: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/group_requests/${groupRequestId}/pay`, {}, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+  
+  getGroupRequestStatus(groupRequestId: number, token: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/group_requests/${groupRequestId}/status`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+  getGroupRequests(token: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/group_requests`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
+  rejectGroupRequest(groupRequestId: number, token: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/group_requests/${groupRequestId}/leave`, {
+      headers: this.getAuthHeaders(token)
+    });
+  }
   
 }

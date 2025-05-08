@@ -5,6 +5,7 @@
   <div class="tab-selector">
     <button [class.active-tab]="selectedTab === 'find'" (click)="selectTab('find')">Find</button>
     <button [class.active-tab]="selectedTab === 'friends'" (click)="selectTab('friends')">Friends</button>
+    <button [class.active-tab]="selectedTab === 'grouprequest'" (click)="selectTab('grouprequest')">Group Request</button>
     <button [class.active-tab]="selectedTab === 'transactions'" (click)="selectTab('transactions')">My Transactions</button>
     <button [class.active-tab]="selectedTab === 'frequent'" (click)="selectTab('frequent')">Frequent Contacts</button>
     <button [class.active-tab]="selectedTab === 'requests'" (click)="selectTab('requests')" style="position: relative;">
@@ -61,7 +62,7 @@
             </button>
 
             <button
-              class="action-btn"
+              class="action-btn2"
               title="Follow"
               (click)="follow(user)">
               <i class="material-icons">person_add</i>
@@ -74,6 +75,79 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="selectedTab === 'grouprequest'" class="group-request-tab">
+  <div class="group-request-card">
+    <h2>Create Group Request</h2>
+
+    <div class="form-row">
+      <select class="source-selector" [(ngModel)]="userSource" (change)="resetParticipantSearch()">
+        <option value="all">All Users</option>
+        <option value="friends">Friends Only</option>
+      </select>
+    
+      <input
+        type="text"
+        [(ngModel)]="searchParticipant"
+        placeholder="Search by name or email"
+        (input)="filterParticipants()"
+      />
+    
+      <input
+        type="number"
+        [(ngModel)]="newAmount"
+        placeholder="Amount (€)"
+      />
+    
+      <button class="custom-btn purple" (click)="addParticipant()">Add Participant</button>
+    </div>
+    
+
+    <ul *ngIf="filteredParticipantOptions.length > 0" class="autocomplete-list">
+      <li
+        *ngFor="let user of filteredParticipantOptions"
+        [class.selected]="user.id === selectedParticipant?.id"
+        (click)="selectUser(user)"
+      >
+        {{ user.name }} ({{ user.email }})
+      </li>
+    </ul>
+
+    <div class="form-section">
+      <h4>Added Participants:</h4>
+      <ul>
+        <li *ngFor="let p of groupParticipants">
+          {{ p.name }} ({{ p.email }}) – {{ p.amount | number: '1.2-2' }} €
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-row">
+      <input
+      type="number"
+      class="manual-total-input"
+      [(ngModel)]="manualTotal"
+      placeholder="Total to split"
+    />
+
+      <button class="custom-btn purple" (click)="distributeEqually()">Split Evenly</button>
+    </div>
+
+    <div class="form-section total">
+      <strong>Current Total:</strong> {{ totalAmount() | number: '1.2-2' }} €
+    </div>
+
+    <input
+      type="text"
+      [(ngModel)]="groupDescription"
+      placeholder="Description"
+      style="width: 98%; padding: 0.5rem; margin-top: 10px;"
+    />
+
+    <button class="custom-btn green" (click)="createGroupRequest()">Create Request</button>
+  </div>
+</div>
+
 
 <div *ngIf="selectedTab === 'friends'">
   <div class="search-filter-container">
@@ -119,7 +193,7 @@
             </button>
 
             <!-- Botón para dejar de seguir -->
-            <button class="action-btn" title="Unfollow" (click)="unfollow(user)">
+            <button class="action-btn3" title="Unfollow" (click)="unfollow(user)">
               <i class="material-icons">person_remove</i>
             </button>
           </div>

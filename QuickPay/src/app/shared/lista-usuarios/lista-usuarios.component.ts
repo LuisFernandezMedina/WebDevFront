@@ -34,7 +34,7 @@ export class ListaUsuariosComponent implements OnInit{
   filterBy: string = 'all';
   myemail: string = '';
   searchBy: 'name' | 'email' = 'name';
-  selectedTab: 'find' | 'friends' | 'transactions' | 'requests' | 'frequent' = 'find';
+  selectedTab: 'find' | 'friends' | 'transactions' | 'requests' | 'frequent'| 'grouprequest'= 'find';
   userId: number = 0;
   modalVisible: boolean = false;
   modalMessage: string = '';
@@ -141,7 +141,7 @@ this.users.forEach((user: any) => {
       id: 1,
       name: 'Aaron Smith',
       email: 'aaron.smith@example.com',
-      balance: 100.00
+      balance: 100.
     }
   ];
 
@@ -158,13 +158,17 @@ this.users.forEach((user: any) => {
       // Primero obtenemos todos los usuarios
       this.userService.getAllUsers(token).subscribe({
         next: (users) => {
-          this.users = users;
+          this.users = users
+          .filter((u: Usuario) => u.id !== this.userId);
+
   
           // Luego usamos esos usuarios para mapear los IDs de amigos a objetos completos
           this.userService.getFriends(this.userId, token).subscribe({
             next: (friendList) => {
               console.log('📩 Amigos recibidos (objetos):', friendList);
               this.friends = friendList;
+              this.friends = friendList.filter(u => u.role !== 'admin' && u.id !== this.userId);
+
             },
             error: (err) => console.error('Error al obtener amigos:', err)
           });
@@ -188,7 +192,7 @@ this.users.forEach((user: any) => {
     );
   }
 
-  selectTab(tab: 'find' | 'friends' | 'transactions' | 'requests'| 'frequent') {
+  selectTab(tab: 'find' | 'friends' | 'transactions' | 'requests'| 'frequent' | 'grouprequest') {
     this.selectedTab = tab;
     if (tab === 'requests') {
       this.loadRequests();
@@ -202,42 +206,95 @@ this.users.forEach((user: any) => {
   requests: any[] = [];
 
   acceptRequest(req: any) {
-    this.userService.acceptRequest(req.id, this.token).subscribe({
-      next: () => {
-        this.showModal('✅ Payment sent successfully');
-        this.requests = this.requests.filter(r => r.id !== req.id);
-      },
-      error: (err) => {
-        this.showModal('❌ Error: ' + (err.error?.error || 'Could not accept the request'));
-      }
-    });
+    if (req.type === 'group') {
+      this.userService.acceptGroupRequest(req.id, this.token).subscribe({
+        next: () => {
+          this.showModal('✅ Group request accepted');
+          this.requests = this.requests.filter(r => r.id !== req.id || r.type !== 'group');
+        },
+        error: (err) => {
+          this.showModal('❌ Error: ' + (err.error?.error || 'Could not accept the group request'));
+        }
+      });
+    } else {
+      this.userService.acceptRequest(req.id, this.token).subscribe({
+        next: () => {
+          this.showModal('✅ Request accepted');
+          this.requests = this.requests.filter(r => r.id !== req.id || r.type !== 'single');
+        },
+        error: (err) => {
+          this.showModal('❌ Error: ' + (err.error?.error || 'Could not accept the request'));
+        }
+      });
+    }
   }
   
   rejectRequest(req: any) {
-    this.userService.deleteRequest(req.id, this.token).subscribe({
-      next: () => {
-        this.showModal('🔕 Request rejected');
-        this.requests = this.requests.filter(r => r.id !== req.id);
-      },
-      error: (err) => {
-        this.showModal('❌ Error: ' + (err.error?.error || 'Could not reject the request'));
-      }
-    });
+    if (req.type === 'group') {
+      this.userService.rejectGroupRequest(req.id, this.token).subscribe({
+        next: () => {
+          this.showModal('🔕 Group request rejected');
+          this.requests = this.requests.filter(r => r.id !== req.id || r.type !== 'group');
+        },
+        error: (err) => {
+          this.showModal('❌ Error: ' + (err.error?.error || 'Could not reject the group request'));
+        }
+      });
+    } else {
+      this.userService.deleteRequest(req.id, this.token).subscribe({
+        next: () => {
+          this.showModal('🔕 Request rejected');
+          this.requests = this.requests.filter(r => r.id !== req.id || r.type !== 'single');
+        },
+        error: (err) => {
+          this.showModal('❌ Error: ' + (err.error?.error || 'Could not reject the request'));
+        }
+      });
+    }
   }
   
   loadRequests() {
     if (!this.token || !this.userId) return;
   
+    // 1. Obtener todos los usuarios para mapear IDs a nombres
     this.userService.getAllUsers(this.token).subscribe({
       next: (users) => {
-        const userMap = new Map(users.map((u: any) => [u.id, u.name])); // id → name
+        const userMap = new Map(users.map((u: any) => [u.id, u.name]));
   
+        // 2. Cargar solicitudes normales
         this.userService.myRequests(this.userId, this.token).subscribe({
           next: (res) => {
-            this.requests = [...res.sent_requests, ...res.received_requests].map((r: any) => ({
+            const normalRequests = [...res.sent_requests, ...res.received_requests].map((r: any) => ({
               ...r,
-              requesterName: userMap.get(r.requester_id) || `User ${r.requester_id}`
+              requesterName: userMap.get(r.requester_id) || `User ${r.requester_id}`,
+              type: 'normal'
             }));
+  
+            // 3. Cargar solicitudes grupales
+            this.userService.getGroupRequests(this.token).subscribe({
+              next: (groupRes) => {
+                const groupRequests = [];
+  
+                for (const g of groupRes) {
+                  const me = g.participants.find((p: any) => p.id === this.userId && !p.paid);
+                  if (me) {
+                    groupRequests.push({
+                      id: g.id,
+                      amount: me.amount,
+                      requesterName: g.creator_name || 'Group Request',
+                      type: 'group'
+                    });
+                  }
+                }
+  
+                // 4. Combinar ambos
+                this.requests = [...normalRequests, ...groupRequests];
+              },
+              error: (err) => {
+                console.error('Error loading group requests:', err);
+                this.requests = normalRequests; // fallback
+              }
+            });
           },
           error: () => {
             this.requests = [];
@@ -245,10 +302,11 @@ this.users.forEach((user: any) => {
         });
       },
       error: (err) => {
-        console.error('Error al obtener usuarios:', err);
+        console.error('Error loading users:', err);
       }
     });
   }
+  
 
   get filteredFriends(): Usuario[] {
     return this.friends.filter(friend =>
@@ -285,5 +343,104 @@ this.users.forEach((user: any) => {
       }
     });
   }  
+  userSource: 'all' | 'friends' = 'all';
+searchParticipant: string = '';
+newAmount: number = 0;
+manualTotal: number | null = null;
+groupDescription: string = '';
+groupParticipants: any[] = [];
+filteredParticipantOptions: any[] = [];
+
+resetParticipantSearch() {
+  this.searchParticipant = '';
+  this.filteredParticipantOptions = this.getUserSource();
+}
+
+getUserSource() {
+  return this.userSource === 'friends' ? this.friends : this.users;
+}
+
+filterParticipants() {
+  const query = this.searchParticipant.toLowerCase();
+  this.filteredParticipantOptions = this.getUserSource().filter(u =>
+    u.name.toLowerCase().includes(query) || u.email.toLowerCase().includes(query)
+  );
+}
+
+addParticipant() {
+  const user = this.selectedParticipant;
+  if (!user) return;
+
+  if (this.groupParticipants.some(p => p.id === user.id)) return;
+
+  this.groupParticipants.push({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    amount: this.newAmount || 0
+  });
+
+  // Reset
+  this.selectedParticipant = null;
+  this.searchParticipant = '';
+  this.newAmount = 0;
+}
+
+
+distributeEqually() {
+  if (!this.manualTotal || this.groupParticipants.length === 0) return;
+
+  const equalAmount = +(this.manualTotal / this.groupParticipants.length).toFixed(2);
+  this.groupParticipants = this.groupParticipants.map(p => ({ ...p, amount: equalAmount }));
+}
+
+totalAmount(): number {
+  return this.groupParticipants.reduce((sum, p) => sum + (p.amount || 0), 0);
+}
+
+createGroupRequest() {
+  const token = this.token; // Asegúrate de tenerlo
+  const payload = {
+    total_amount: this.totalAmount(),
+    description: this.groupDescription || 'Sin descripción',
+    participants: this.groupParticipants.map(p => ({
+      id: p.id,
+      amount: p.amount
+    }))
+  };
+
+  this.userService.createGroupRequest(payload, token).subscribe({
+    next: res => {
+      this.groupParticipants = [];
+      this.manualTotal = null;
+      this.groupDescription = '';
+      alert('Solicitud creada con éxito');
+    },
+    error: err => alert('Error: ' + err.error?.error || 'No se pudo crear la solicitud')
+  });
+}
+selectParticipant(user: any) {
+  if (this.groupParticipants.some(p => p.id === user.id)) return;
+
+  this.groupParticipants.push({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    amount: this.newAmount || 0
+  });
+
+  this.searchParticipant = '';
+  this.newAmount = 0;
+  this.filteredParticipantOptions = [];
+}
+
+selectedParticipant: any = null;
+selectUser(user: any) {
+  this.selectedParticipant = user;
+  this.searchParticipant = `${user.name} (${user.email})`;
+  this.filteredParticipantOptions = [];
+}
+
+
 
 }
